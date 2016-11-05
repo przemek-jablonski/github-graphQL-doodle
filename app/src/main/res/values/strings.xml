@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">github-graphql-doodle</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="github_endpoint">https://api.github.com/</string>
+    <string name="github_apikey">@string/github_graphql_app_personal_token</string>
+
 </resources>
