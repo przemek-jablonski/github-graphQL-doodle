@@ -21,6 +21,13 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import graphql.GraphQL;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLSchema;
+
+import static graphql.Scalars.GraphQLString;
+import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
+import static graphql.schema.GraphQLObjectType.newObject;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -64,6 +71,20 @@ public class MainActivityFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        GraphQLObjectType queryType = newObject()
+                .name("helloWorldQuery")
+                .field(newFieldDefinition()
+                        .type(GraphQLString)
+                        .name("hello")
+                        .staticValue("world"))
+                .build();
+
+        GraphQLSchema schema = GraphQLSchema.newSchema()
+                .query(queryType)
+                .build();
+        Map<String, Object> result = (Map<String, Object>) new GraphQL(schema).execute("{hello}").getData();
+
+        textView.setText(result.toString());
     }
 
     @Override
