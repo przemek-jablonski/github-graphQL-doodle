@@ -69,8 +69,8 @@ public final class GraphQLConverterFactory extends Converter.Factory {
             Annotation[] methodAnnotations,
             Retrofit retrofit) {
 
-        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new GraphQLRequestBodyConverter<>(gson, adapter);
+//        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
+        return new GraphQLRequestBodyConverter<>();
     }
 
     /**

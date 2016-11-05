@@ -8,15 +8,16 @@ import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlB
 
 public class RepositoryOwner extends GraphqlBaseObject {
 
+    private String avatarURL;
+    private String login;
+    private String path;
+    private String url;
+//    private Repository[] repositories;
+
 
     public RepositoryOwner(String serializableName, boolean hasArguments, String argValue) {
         super(serializableName, hasArguments, argValue);
     }
-
-    String avatarURL;
-    String login;
-    String path;
-    String url;
 
 
     public String getAvatarURL() {
@@ -34,4 +35,8 @@ public class RepositoryOwner extends GraphqlBaseObject {
     public String getUrl() {
         return url;
     }
+
+//    public Repository[] getRepositories() {
+//        return repositories;
+//    }
 }

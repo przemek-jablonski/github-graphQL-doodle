@@ -32,15 +32,6 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
     private final String ARGUMENT_APPEND_NEXT = ",";
 
 
-    boolean firstStringUsed = false;
-    private final Gson gson;
-    private final TypeAdapter<G> adapter;
-
-    public GraphQLRequestBodyConverter(Gson gson, TypeAdapter<G> adapter) {
-        this.gson = gson;
-        this.adapter = adapter;
-    }
-
     @Override
     public RequestBody convert(G value) throws IOException, ClassCastException {
 
@@ -63,44 +54,30 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 
         }
 
-        String costam;
-//        String serializedValueStringFull = requestPayloadWrapper(serializedValueString);
-        if (!firstStringUsed) {
-//            serializedValueString =  "{\"query\": \"query { viewer { login }}\"}";
-            serializedValueString =  "{\"query\": \"query { repositoryOwner(login:\"ReactiveX\") { login }}\"}";
-            costam = "{ viewer { login }}";
-            firstStringUsed = true;
-        } else {
-            serializedValueString = "{\"query\": \"query { repositoryOwner (login: \"ReactiveX\") { avatarURL login path url }}\"}";
-            costam = "{ repositoryOwner (login: \"ReactiveX\") { avatarURL login path url }}";
-        }
-
-
         JSONObject object = new JSONObject();
         try {
-            object.put("query", costam);
+            object.put("query", serializedValueString);
         } catch (JSONException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //todo: something more elaborate here
         }
         return RequestBody.create(MEDIA_TYPE, object.toString());
     }
 
-    private String requestPayloadWrapper(String payload) {
-        String string =  "{\"query\":";
-        string += "\"query ";
-        string += payload;
-        string += "\"}";
-        return string;
-    }
-
-    private String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) {
+    private String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) /*throws IllegalAccessException*/ {
         Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
 
         StringBuilder queryFieldsBuilder = new StringBuilder();
         for (int i = 0; i < fields.length; ++i) {
-            Field field = fields[i];
-            Class clazz = field.getType();
-            queryFieldsBuilder.append(field.getName());
+//            if (fields[i].getClass().isAssignableFrom(GraphqlBaseObject.class)) {
+//                GraphqlBaseObject childField = (GraphqlBaseObject) fields[i].get(graphqlBaseObject);
+//                buildGraphqlQuery(
+//                        childField.getSerializableName(),
+//                        childField.hasArguments(),
+//                        childField.getArgKey(),
+//                        childField.getArgValue()
+//                );
+//            }
+            queryFieldsBuilder.append(fields[i].getName());
             if (i != fields.length-1) {
                 queryFieldsBuilder.append(" ");
             }
@@ -112,13 +89,15 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
     private String buildGraphqlQuery(String serializableName, boolean arguments, String argumentKey, String argumentValue) {
         StringBuilder query = new StringBuilder();
         query.append(serializableName);
-        query.append(ARGUMENTS_START)
-                .append(argumentKey)
-                .append(ARGUMENT_KEY_VALUE_SEPARATOR)
-                .append("\"")
-                .append(argumentValue)
-                .append("\"")
-                .append(ARGUMENTS_END);
+        if(arguments) {
+            query.append(ARGUMENTS_START)
+                    .append(argumentKey)
+                    .append(ARGUMENT_KEY_VALUE_SEPARATOR)
+                    .append("\"")
+                    .append(argumentValue)
+                    .append("\"")
+                    .append(ARGUMENTS_END);
+        }
         return query.toString();
     }
 
