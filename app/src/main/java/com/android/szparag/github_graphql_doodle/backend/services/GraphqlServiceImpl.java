@@ -22,10 +22,4 @@ public class GraphqlServiceImpl implements GraphqlService {
     public void getGraphData(GraphqlBaseObject graphqlObject, Callback<GraphqlResponseObject> callback) {
         api.getGraphData(graphqlObject).enqueue(callback);
     }
-
-
-//    @Override
-//    public void getData(String string, Callback<String> callback) {
-//        api.getGraphData(string).enqueue(callback);
-//    }
 }

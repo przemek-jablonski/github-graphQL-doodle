@@ -1,7 +1,12 @@
 package com.android.szparag.github_graphql_doodle.backend.models;
 
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlEgdeObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlEdgeObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import graphql.relay.Edge;
 
 /**
  * Created by ciemek on 05/11/2016.
@@ -13,7 +18,8 @@ public class Repository extends GraphqlBaseObject {
         super(serializableName, hasArguments, argValue);
     }
 
+    public List<GraphqlEdgeObject> edges = new ArrayList<GraphqlEdgeObject>();
 
-    GraphqlEgdeObject<Repository>[] edges;
+
 
 }

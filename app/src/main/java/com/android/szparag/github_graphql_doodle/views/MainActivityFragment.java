@@ -3,7 +3,6 @@ package com.android.szparag.github_graphql_doodle.views;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 
 import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlDataObject;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlResponseObject;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
@@ -26,9 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class MainActivityFragment extends Fragment {
 
 
@@ -112,8 +107,8 @@ public class MainActivityFragment extends Fragment {
 ////        textView.setText(queryType2.toString());
 //        textView2.setText(graphQLSchema2.getAllTypesAsList().toString());
 ////        textView3.setText(graphQLSchema2.getDictionary().toString());
-
         RepositoryOwner repositoryOwner = new RepositoryOwner("repositoryOwner", true, "ReactiveX");
+
         service.getGraphData(repositoryOwner, new Callback<GraphqlResponseObject>() {
                     @Override
                     public void onResponse(Call<GraphqlResponseObject> call, Response<GraphqlResponseObject> response) {

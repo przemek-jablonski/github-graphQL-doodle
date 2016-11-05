@@ -12,11 +12,13 @@ public class RepositoryOwner extends GraphqlBaseObject {
     private String login;
     private String path;
     private String url;
-//    private Repository[] repositories;
+    private Repository repositories;
 
 
     public RepositoryOwner(String serializableName, boolean hasArguments, String argValue) {
         super(serializableName, hasArguments, argValue);
+        int repos = 3;
+
     }
 
 
