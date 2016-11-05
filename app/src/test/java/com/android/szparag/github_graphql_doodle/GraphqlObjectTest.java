@@ -1,12 +1,11 @@
 package com.android.szparag.github_graphql_doodle;
 
-import com.android.szparag.github_graphql_doodle.backend.models.GraphqlBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
 
 import org.junit.Test;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -28,7 +27,7 @@ public class GraphqlObjectTest {
     @Test
     public void fieldSerializationTest() {
         RepositoryOwner repositoryOwner = new RepositoryOwner("repositoryOwner", true, "ReactiveX");
-        assertEquals("avatarURL login path url", buildQueryFieldsString(repositoryOwner));
+        assertEquals("avatarURL login path url", buildGraphqlFields(repositoryOwner));
     }
 
     @Test
@@ -39,20 +38,7 @@ public class GraphqlObjectTest {
         RepositoryOwner repositoryOwner = new RepositoryOwner("repositoryOwner", true, "ReactiveX");
 
 
-        serialized.append(
-                insertExpression(
-                        buildGraphqlQuery(
-                                repositoryOwner.getSerializableName(),
-                                repositoryOwner.hasArguments(),
-                                repositoryOwner.getArgKey(),
-                                repositoryOwner.getArgValue()
-                        ), insertExpression(
-                                buildQueryFieldsString(
-                                        repositoryOwner
-                                )
-                        )
-                )
-        );
+        serialized = buildRequestString(serialized, repositoryOwner);
 
 
         assertEquals(
@@ -61,12 +47,35 @@ public class GraphqlObjectTest {
         );
     }
 
-    public String buildQueryFieldsString(GraphqlBaseObject graphqlBaseObject) {
+    //todo: delete that (propably already exists in code)
+
+    private StringBuilder buildRequestString(StringBuilder serialized, GraphqlBaseObject graphqlBaseObject) {
+        serialized.append(
+                insertExpression(
+                        buildGraphqlQuery(
+                                graphqlBaseObject.getSerializableName(),
+                                graphqlBaseObject.hasArguments(),
+                                graphqlBaseObject.getArgKey(),
+                                graphqlBaseObject.getArgValue()
+                        ), insertExpression(
+                                buildGraphqlFields(
+                                        graphqlBaseObject
+                                )
+                        )
+                )
+        );
+
+        return serialized;
+    }
+
+    public String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) {
         Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
 
         StringBuilder queryFieldsBuilder = new StringBuilder();
         for (int i = 0; i < fields.length; ++i) {
-            queryFieldsBuilder.append(fields[i].getName());
+            Field field = fields[i];
+            Class clazz = field.getType();
+            queryFieldsBuilder.append(field.getName());
             if (i != fields.length-1) {
                 queryFieldsBuilder.append(" ");
             }

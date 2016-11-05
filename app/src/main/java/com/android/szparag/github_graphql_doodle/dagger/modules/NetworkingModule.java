@@ -6,9 +6,11 @@ import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.backend.apis.GraphqlApi;
 import com.android.szparag.github_graphql_doodle.backend.interceptors.OAuthTokenInterceptor;
 import com.android.szparag.github_graphql_doodle.backend.interceptors.PrintResponseInterceptor;
+import com.android.szparag.github_graphql_doodle.backend.serializers.GraphQLConverterFactory;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlServiceImpl;
 import com.android.szparag.github_graphql_doodle.utils.Constants;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -48,11 +50,12 @@ public class NetworkingModule {
             @Named(Constants.GITHUB_GRAPHQL_APIKEY) String graphqlApiKey) {
         return new Retrofit.Builder()
                 .baseUrl(graphqlEndpoint)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(new GraphQLConverterFactory())
                 .client(
                         new OkHttpClient.Builder()
                                 .addInterceptor(new OAuthTokenInterceptor(graphqlApiKey))
                                 .addInterceptor(new PrintResponseInterceptor()) //debug
+                                .addNetworkInterceptor(new StethoInterceptor())
                                 .build())
                 .build();
     }

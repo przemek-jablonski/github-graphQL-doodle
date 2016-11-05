@@ -1,5 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.services;
 
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
+
 import retrofit2.Callback;
 
 /**
@@ -8,6 +10,6 @@ import retrofit2.Callback;
 
 public interface GraphqlService {
 
-    void getData(String string, Callback<String> callback);
+    void getGraphData(GraphqlBaseObject graphqlObject, Callback<GraphqlBaseObject> callback);
 
 }

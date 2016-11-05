@@ -1,7 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.services;
 
-import com.android.szparag.github_graphql_doodle.GraphqlDoodleApplication;
 import com.android.szparag.github_graphql_doodle.backend.apis.GraphqlApi;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
 
 import retrofit2.Callback;
 
@@ -18,7 +18,13 @@ public class GraphqlServiceImpl implements GraphqlService {
     }
 
     @Override
-    public void getData(String string, Callback<String> callback) {
-        api.getData(string).enqueue(callback);
+    public void getGraphData(GraphqlBaseObject graphqlObject, Callback<GraphqlBaseObject> callback) {
+        api.getGraphData(graphqlObject).enqueue(callback);
     }
+
+
+//    @Override
+//    public void getData(String string, Callback<String> callback) {
+//        api.getGraphData(string).enqueue(callback);
+//    }
 }

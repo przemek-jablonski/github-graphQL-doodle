@@ -10,6 +10,8 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.android.szparag.github_graphql_doodle.R;
+import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlServiceImpl;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
@@ -24,6 +26,10 @@ import butterknife.Unbinder;
 import graphql.GraphQL;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
@@ -37,6 +43,12 @@ public class MainActivityFragment extends Fragment {
 
     @BindView(R.id.textview)
     TextView textView;
+
+    @BindView(R.id.textview2)
+    TextView textView2;
+
+    @BindView(R.id.textview3)
+    TextView textView3;
 
     private Unbinder unbinder;
 
@@ -71,20 +83,69 @@ public class MainActivityFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        GraphQLObjectType queryType = newObject()
-                .name("helloWorldQuery")
-                .field(newFieldDefinition()
-                        .type(GraphQLString)
-                        .name("hello")
-                        .staticValue("world"))
-                .build();
+//        GraphQLObjectType queryType = newObject()
+//                .name("helloWorldQuery")
+//                .field(newFieldDefinition()
+//                        .type(GraphQLString)
+//                        .name("hello")
+//                        .staticValue("world"))
+//                .build();
+//
+//        GraphQLSchema schema = GraphQLSchema.newSchema()
+//                .query(queryType)
+//                .build();
 
-        GraphQLSchema schema = GraphQLSchema.newSchema()
-                .query(queryType)
-                .build();
-        Map<String, Object> result = (Map<String, Object>) new GraphQL(schema).execute("{hello}").getData();
 
-        textView.setText(result.toString());
+//        Map<String, Object> result = (Map<String, Object>) new GraphQL(schema).execute("{hello}").getData();
+
+//        GsonConverterFactory
+
+//        textView.setText(result.toString());
+
+//        GraphQLObjectType queryType2 = newObject()
+//                .name("repositoryOwner")
+//                .field(newFieldDefinition()
+//                        .type(GraphQLString)
+//                        .name("login"))
+//                .field(newFieldDefinition()
+//                        .type(GraphQLString)
+//                        .name("avatarURL"))
+//                .build();
+//
+//        GraphQLSchema graphQLSchema2 = GraphQLSchema.newSchema()
+//                .query(queryType2)
+//                .build();
+
+////        textView.setText(queryType2.toString());
+//        textView2.setText(graphQLSchema2.getAllTypesAsList().toString());
+////        textView3.setText(graphQLSchema2.getDictionary().toString());
+
+        final RepositoryOwner repositoryOwner = new RepositoryOwner("repositoryOwner", true, "ReactiveX");
+        service.getGraphData(repositoryOwner, new Callback<GraphqlBaseObject>() {
+            @Override
+            public void onResponse(Call<GraphqlBaseObject> call, Response<GraphqlBaseObject> response) {
+//                Utils.logRetrofit("SUCCESS");
+//                textView.setText(response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<GraphqlBaseObject> call, Throwable t) {
+//                Utils.logRetrofit("FAILURE");
+            }
+        });
+
+        service.getGraphData(repositoryOwner, new Callback<GraphqlBaseObject>() {
+            @Override
+            public void onResponse(Call<GraphqlBaseObject> call, Response<GraphqlBaseObject> response) {
+//                Utils.logRetrofit("SUCCESS");
+//                textView.setText(response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<GraphqlBaseObject> call, Throwable t) {
+//                Utils.logRetrofit("FAILURE");
+            }
+        });
     }
 
     @Override

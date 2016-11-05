@@ -1,5 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.apis;
 
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -11,6 +13,6 @@ import retrofit2.http.POST;
 public interface GraphqlApi {
 
     @POST("graphql")
-    Call<String> getData(@Body String string);
+    Call<GraphqlBaseObject> getGraphData(@Body GraphqlBaseObject graphqlObject);
 
 }
