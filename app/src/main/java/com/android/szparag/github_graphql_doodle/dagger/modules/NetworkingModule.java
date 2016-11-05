@@ -59,7 +59,7 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public GraphqlApi provideGraphqlApi(Retrofit retrofit) {
+    public GraphqlApi provideGraphqlApi(@Named(Constants.RETROFIT_ADAPTER_GRAPHQL) Retrofit retrofit) {
         return retrofit.create(GraphqlApi.class);
     }
 

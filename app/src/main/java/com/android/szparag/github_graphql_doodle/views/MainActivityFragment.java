@@ -10,8 +10,11 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.android.szparag.github_graphql_doodle.R;
+import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlServiceImpl;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -31,7 +34,7 @@ public class MainActivityFragment extends Fragment {
     private Unbinder unbinder;
 
     @Inject
-    GraphqlServiceImpl service;
+    GraphqlService service;
 
     public MainActivityFragment() {
     }
@@ -61,7 +64,6 @@ public class MainActivityFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-//        service.getData();
     }
 
     @Override
