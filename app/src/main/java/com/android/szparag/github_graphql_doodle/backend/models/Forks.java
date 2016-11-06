@@ -5,4 +5,6 @@ package com.android.szparag.github_graphql_doodle.backend.models;
  */
 
 public class Forks {
+
+    public Integer totalCount;
 }

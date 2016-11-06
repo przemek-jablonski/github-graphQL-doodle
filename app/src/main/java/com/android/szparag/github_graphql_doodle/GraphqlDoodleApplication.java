@@ -16,6 +16,7 @@ public class GraphqlDoodleApplication extends Application {
 
     private MainComponent daggerComponent;
 
+
     @Override
     public void onCreate() {
         super.onCreate();

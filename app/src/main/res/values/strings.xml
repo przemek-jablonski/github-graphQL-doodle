@@ -6,4 +6,9 @@
     <string name="github_endpoint">https://api.github.com/</string>
     <string name="github_apikey">@string/github_graphql_app_personal_token</string>
 
+    <string name="data_fetch_success">Fetched data successfully</string>
+    <string name="data_fetch_failure">Fetching data failed</string>
+
+    <string name="network_connection_failure">No internet connection!</string>
+
 </resources>

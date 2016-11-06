@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.android.szparag.github_graphql_doodle.R;
 
-public class MainActivity extends AppCompatActivity {
+public class GithubListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

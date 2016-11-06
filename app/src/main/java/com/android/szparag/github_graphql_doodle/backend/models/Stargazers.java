@@ -11,5 +11,5 @@ public class Stargazers extends GraphqlBaseObject {
         super("stargazers", hasArguments, argValue);
     }
 
-    Integer totalCount;
+    public Integer totalCount;
 }

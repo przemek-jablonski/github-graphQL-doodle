@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.android.szparag.github_graphql_doodle.GraphqlDoodleApplication;
+import com.android.szparag.github_graphql_doodle.presenters.GithubListPresenter;
+import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -26,8 +28,14 @@ public class GraphqlDoodleModule {
     }
 
     @Provides
-    public Context provideContext() {
+    Context provideContext() {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    GithubListBasePresenter provideGithubListBasePresenter() {
+        return new GithubListPresenter();
     }
 
 }

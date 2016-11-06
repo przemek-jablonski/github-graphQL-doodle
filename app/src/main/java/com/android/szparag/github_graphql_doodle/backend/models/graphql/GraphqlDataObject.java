@@ -12,4 +12,11 @@ public class GraphqlDataObject {
     Repository repository;
     RepositoryOwner repositoryOwner;
 
+    public Repository getRepository() {
+        return repository;
+    }
+
+    public RepositoryOwner getRepositoryOwner() {
+        return repositoryOwner;
+    }
 }

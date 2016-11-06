@@ -12,5 +12,6 @@ public class Watchers extends GraphqlBaseObject {
         super("watchers", false, argValue);
     }
 
-    Integer totalCount;
+    //todo: too much public shit in models!
+    public  Integer totalCount;
 }

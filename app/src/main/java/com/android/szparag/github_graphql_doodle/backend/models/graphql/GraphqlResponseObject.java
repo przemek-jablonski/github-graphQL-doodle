@@ -8,4 +8,7 @@ public class GraphqlResponseObject {
 
     GraphqlDataObject data;
 
+    public GraphqlDataObject getData() {
+        return data;
+    }
 }

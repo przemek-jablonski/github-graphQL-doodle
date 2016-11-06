@@ -20,4 +20,28 @@ public class GraphqlNodeObject extends GraphqlBaseObject {
     Forks forks;
     Stargazers stargazers;
     Watchers watchers;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Forks getForks() {
+        return forks;
+    }
+
+    public Stargazers getStargazers() {
+        return stargazers;
+    }
+
+    public Watchers getWatchers() {
+        return watchers;
+    }
 }
