@@ -1,13 +1,19 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlType;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import graphql.GraphQL;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Converter;
@@ -26,14 +32,23 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
     private final String ARGUMENTS_START = "(";
     private final String ARGUMENTS_END = ")";
     private final String ARGUMENT_KEY_VALUE_SEPARATOR = ":";
+    private final String ARGUMENT_VALUE = "\"";
     private final String ARGUMENT_APPEND_NEXT = ",";
     private final String QUERY = "query";
+    private final String FIELDS_SEPARATOR = " ";
 
 
-    //todo: delete and refactor, so that there will be only 1 StringBuilder instance for entire class
+    private StringBuilder stringBuilder;
+
+    public GraphQLRequestBodyConverter() {
+        stringBuilder = new StringBuilder(); //fixme: this should be deleted, dev/debug only
+    }
+
 
     @Override
     public RequestBody convert(G value) throws IOException, ClassCastException {
+
+        stringBuilder = new StringBuilder();
 
         JSONObject json = new JSONObject();
 
@@ -48,6 +63,93 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
         }
 
         return RequestBody.create(MEDIA_TYPE, json.toString());
+
+//        if (value instanceof GraphqlBaseObject) {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            return RequestBody.create(
+//                    MEDIA_TYPE,
+//                    convertQueryToJson(
+//                            convertBaseObjectToQuery(stringBuilder, ((GraphqlBaseObject) value)))
+//                            .toString()
+//            );
+//        }
+//
+//        return null;
+    }
+
+//    private JSONObject convertQueryToJson(String graphqlQuery) {
+//        JSONObject json = new JSONObject();
+//        try {
+//            json.put(QUERY, graphqlQuery);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//        return json;
+//    }
+
+    public String convertBaseObjectToQuery(GraphqlBaseObject graphqlBaseObject) {
+        stringBuilder.append(EXPRESSION_START);
+
+        makeQuery(graphqlBaseObject);
+        stringBuilder.append(EXPRESSION_START);
+
+        Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
+
+        for (int f = 0; f < fields.length; ++f) {
+//            boolean isAssignable = fields[f].getClass().isAssignableFrom(GraphqlBaseObject.class);
+//            boolean isAssignable = ;
+
+//            String name = fields[f].getGenericType().getClass().getName();
+//            String name1 = fields[f].getDeclaringClass().getName();
+////            String name5 = fields[f].getDeclaringClass().getEnclosingClass().getName();
+//            String name4 = fields[f].getDeclaringClass().getSuperclass().getName();
+//            String name3 = fields[f].getDeclaringClass().getGenericSuperclass().getClass().getName();
+////            String name2 = fields[f].getDeclaringClass().getDeclaringClass().getName();
+//            String name6 = fields[f].getClass().getName();
+////            String name7 = fields[f].getClass().getEnclosingClass().getName();
+//            String name8 = fields[f].getClass().getSuperclass().getName();
+//            String name9 = fields[f].getClass().getGenericSuperclass().getClass().getName();
+////            String name10 = fields[f].getClass().getDeclaringClass().getName();
+
+//            if (fields[f].getDeclaringClass().getSuperclass().isAssignableFrom(GraphqlBaseObject.class)) {
+//            String name = fields[f].getType().getName();
+//            String name1 = fields[f].getType().getSuperclass().getName();
+//
+//            boolean annot =
+//            boolean assignable = fields[f].getType().isAssignableFrom(GraphqlBaseObject.class);
+            if (fields[f].getType().isAnnotationPresent(GraphqlType.class)
+                    || fields[f].getType().getSuperclass().isAnnotationPresent(GraphqlType.class)) {
+                stringBuilder.append(FIELDS_SEPARATOR).append("CUSTOM!").append(FIELDS_SEPARATOR);
+            } else {
+                stringBuilder.append(FIELDS_SEPARATOR).append(fields[f].getName()).append(FIELDS_SEPARATOR);
+            }
+        }
+
+
+        stringBuilder.append(EXPRESSION_END);
+
+        stringBuilder.append(EXPRESSION_END);
+        return stringBuilder.toString();
+    }
+
+    private void makeQuery(GraphqlBaseObject graphqlBaseObject) {
+        stringBuilder.append(graphqlBaseObject.getSerializableName());
+
+        if (graphqlBaseObject.getArgumentMap() != null) {
+            makeArguments(graphqlBaseObject.getArgumentMap());
+        }
+    }
+
+    private void makeArguments(Map<String, String> argumentMap) {
+        stringBuilder.append(ARGUMENTS_START);
+        for (Map.Entry<String, String> entry : argumentMap.entrySet()) {
+            stringBuilder.append(entry.getKey()).append(ARGUMENT_KEY_VALUE_SEPARATOR);
+            stringBuilder.append(ARGUMENT_VALUE).append(entry.getValue()).append(ARGUMENT_VALUE);
+            stringBuilder.append(ARGUMENT_APPEND_NEXT);
+        }
+        stringBuilder.deleteCharAt(stringBuilder.toString().length()-1); //todo: refactor, perf drop here
+        stringBuilder.append(ARGUMENTS_END);
     }
 
 
@@ -69,7 +171,7 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 //
 //        return serializedValueString;
 //    }
-//
+
 //    /**
 //     * Builds 'fields' part of GraphQL query.
 //     * Takes a graph object (GraphqlBaseObject), seeks all relevant fields to fill and puts them inside

@@ -3,7 +3,6 @@ package com.android.szparag.github_graphql_doodle.dagger;
 import com.android.szparag.github_graphql_doodle.dagger.modules.GraphqlDoodleModule;
 import com.android.szparag.github_graphql_doodle.dagger.modules.NetworkingModule;
 import com.android.szparag.github_graphql_doodle.presenters.GithubListPresenter;
-import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
 import com.android.szparag.github_graphql_doodle.views.GithubListFragment;
 
 import javax.inject.Singleton;

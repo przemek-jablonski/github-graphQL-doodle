@@ -1,18 +1,15 @@
 package com.android.szparag.github_graphql_doodle.dagger.modules;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.android.szparag.github_graphql_doodle.GraphqlDoodleApplication;
 import com.android.szparag.github_graphql_doodle.presenters.GithubListPresenter;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
 
 /**
  * Created by ciemek on 04/11/2016.

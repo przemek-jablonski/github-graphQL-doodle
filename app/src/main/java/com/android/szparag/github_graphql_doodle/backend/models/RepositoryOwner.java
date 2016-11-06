@@ -2,8 +2,9 @@ package com.android.szparag.github_graphql_doodle.backend.models;
 
 import android.support.annotation.Nullable;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlDontFetch;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlFetchMaxLevel;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlConnectionObject;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlEdgeObject;
 
@@ -24,16 +25,17 @@ public class RepositoryOwner extends GraphqlBaseObject {
                 ARGUMENT_LOGIN
         };
         checkArguments(args);
+        repository = new Repository(null);
     }
 
+
+    //todo: http://stackoverflow.com/questions/2211002/why-not-abstract-fields
 
     private String avatarURL;
     private String login;
     private String path;
-//    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> repositories; //todo: we can query for repository OR/AND repositories!
 
-//    @GraphqlFetchMaxLevels(value=)
-//    private RepositoryConnection repositories;
+    @GraphqlFetchMaxLevel(maxLevel=2)
     private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> repositories;
 
     @GraphqlDontFetch
@@ -44,28 +46,4 @@ public class RepositoryOwner extends GraphqlBaseObject {
         return avatarURL;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-//    public RepositoryConnection getRepositories() {
-//        return repositories;
-//    }
-
-    public Repository getRepository() {
-        return repository;
-    }
-
-    //    public void set(String avatarURL, String login, String path,
-//                    RepositoryConnection repositories, Repository repository) {
-//        this.avatarURL = avatarURL;
-//        this.login = login;
-//        this.path = path;
-//        this.repositories = repositories;
-//        this.repository = repository;
-//    }
 }

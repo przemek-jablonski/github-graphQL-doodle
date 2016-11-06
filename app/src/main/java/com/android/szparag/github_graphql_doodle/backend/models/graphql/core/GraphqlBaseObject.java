@@ -1,21 +1,22 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
-import android.support.annotation.Nullable;
-
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlType;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by ciemek on 05/11/2016.
  */
 
+@GraphqlType
 public abstract class GraphqlBaseObject {
 
     protected String serializableName;
-    protected Map<String, String> argumentMap;
+    protected TreeMap<String, String> argumentMap;
     protected String[] availableArgs;
 
 
@@ -24,12 +25,12 @@ public abstract class GraphqlBaseObject {
     }
 
 
-    protected final void checkArguments(LinkedHashMap<String, String> arguments) {
+    protected final void checkArguments(Map<String, String> arguments) {
         if (arguments == null) {
             return;
         }
 
-        argumentMap = new HashMap<>();
+        argumentMap = new TreeMap<>();
         for (int i = 0; i < arguments.size(); ++i) {
             if (arguments.containsKey(availableArgs[i])) {
                 argumentMap.put(availableArgs[i], arguments.get(availableArgs[i]));
@@ -49,7 +50,7 @@ public abstract class GraphqlBaseObject {
         return serializableName;
     }
 
-    public Map<String, String> getArgumentMap() {
+    public TreeMap<String, String> getArgumentMap() {
         return argumentMap;
     }
 }

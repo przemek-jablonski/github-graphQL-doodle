@@ -1,9 +1,9 @@
 package com.android.szparag.github_graphql_doodle.views;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -18,11 +18,9 @@ import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
 import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
 import com.android.szparag.github_graphql_doodle.decorators.HorizontalSeparator;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
-import com.android.szparag.github_graphql_doodle.utils.Constants;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
 import com.android.szparag.github_graphql_doodle.views.contracts.GithubListView;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.inject.Inject;

@@ -57,6 +57,7 @@ public class GithubListPresenter implements GithubListBasePresenter {
 
     private void fetchRepositoryOwnerGraph() {
 
+
         String argumentsLoginString = "ReactiveX";
         LinkedHashMap<String, String> args = new LinkedHashMap<>();
         args.put(Constants.GraphqlConstants.ARGUMENT_LOGIN, argumentsLoginString);

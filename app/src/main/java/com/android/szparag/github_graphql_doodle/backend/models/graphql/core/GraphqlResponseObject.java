@@ -1,5 +1,6 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlType;
 import com.google.gson.annotations.SerializedName;
 
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.NAME_REPOSITORIES;
@@ -10,7 +11,7 @@ import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlC
 /**
  * Created by ciemek on 05/11/2016.
  */
-
+@GraphqlType
 public class GraphqlResponseObject<T extends GraphqlBaseObject> extends GraphqlBaseObject {
 
     private GraphqlDataObject<T> data;

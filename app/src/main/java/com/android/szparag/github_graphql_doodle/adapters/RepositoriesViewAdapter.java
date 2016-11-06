@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.backend.models.Repository;
-import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

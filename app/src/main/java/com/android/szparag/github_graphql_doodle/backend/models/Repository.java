@@ -15,7 +15,6 @@ import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlC
  */
 public class Repository extends GraphqlBaseObject {
 
-
     public Repository(@Nullable LinkedHashMap<String, String> args) {
         super(NAME_REPOSITORY);
         super.availableArgs = new String[]{
@@ -36,13 +35,10 @@ public class Repository extends GraphqlBaseObject {
     private String name;
     private String url;
 
-    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> forks;
-//    private PullRequestConnection   pullRequests;
+    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>>  forks;
     private GraphqlConnectionObject<GraphqlEdgeObject<PullRequest>> pullRequests;
-//    private StargazerConnection     stargazers;
-    private GraphqlConnectionObject<GraphqlEdgeObject<User>> stargazers;
-//    private UserConnection          watchers;
-    private GraphqlConnectionObject<GraphqlEdgeObject<User>> watchers;
+    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        stargazers;
+    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        watchers;
 
 
     public String[] getAvailableArgs() {
