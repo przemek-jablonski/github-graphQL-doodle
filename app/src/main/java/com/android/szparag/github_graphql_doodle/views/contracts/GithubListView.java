@@ -2,7 +2,6 @@ package com.android.szparag.github_graphql_doodle.views.contracts;
 
 import com.android.szparag.github_graphql_doodle.backend.models.Repository;
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlNodeObject;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public interface GithubListView {
     void buildRepositoriesListView();
     void hideRepositoriesListView();
     void showRepositoriesListView();
-    void updateRepositoriesListView(List<GraphqlNodeObject> repositories);
+    void updateRepositoriesListView(List<Repository> repositories);
 
 
 }

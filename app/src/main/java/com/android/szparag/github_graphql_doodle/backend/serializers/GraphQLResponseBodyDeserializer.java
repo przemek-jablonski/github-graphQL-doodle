@@ -1,26 +1,52 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
+import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.utils.Utils;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by ciemek on 05/11/2016.
  */
 
-public class GraphQLResponseBodyDeserializer implements JsonDeserializer<GraphqlBaseObject> {
-    @Override
-    public GraphqlBaseObject deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+public class GraphQLResponseBodyDeserializer<T extends GraphqlBaseObject> implements JsonDeserializer<T> {
 
-        Set<Map.Entry<String, JsonElement>> entries = json.getAsJsonObject().entrySet();
-        Utils.logRetrofit(json.toString());
+    Class clazz;
+
+    public GraphQLResponseBodyDeserializer(Class clazz) {
+        this.clazz = clazz;
+    }
+
+    @Override
+    public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+        //todo: instantiating class from typeOfT
+        if (clazz.getName() == RepositoryOwner.class.getName()) {
+            return (T) deserializeRepositoryOwner(json, context);
+        }
+
+
         return null;
     }
+
+
+    private RepositoryOwner deserializeRepositoryOwner(JsonElement json, JsonDeserializationContext context) {
+        RepositoryOwner repositoryOwner = new RepositoryOwner(null);
+
+        JsonObject jsonObject = json.getAsJsonObject();
+
+        JsonObject jsonObject1 = jsonObject.get(repositoryOwner.getSerializableName()).getAsJsonObject();
+
+        boolean asdasd = jsonObject1.has(repositoryOwner.getAvatarURL());
+
+        String asd = "asd as";
+
+        return null;
+    }
+
 }

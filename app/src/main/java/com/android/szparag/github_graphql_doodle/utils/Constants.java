@@ -17,4 +17,21 @@ public class Constants {
     public static final String LOG_TAG_RETROFIT = "RETROFIT";
     public static final String LOG_TAG_EXCEPTION = "EXCEPTION";
 
+    public class GraphqlConstants {
+        public static final String ARGUMENT_FIRST = "first";
+        public static final String ARGUMENT_AFTER = "after";
+        public static final String ARGUMENT_LAST = "last";
+        public static final String ARGUMENT_BEFORE = "before";
+        public static final String ARGUMENT_PRIVACY = "privacy";
+        public static final String ARGUMENT_ISFORK = "isFork";
+        public static final String ARGUMENT_ORDERBY = "orderBy";
+        public static final String ARGUMENT_NAME = "name";
+        public static final String ARGUMENT_LOGIN = "login";
+
+        public static final String NAME_REPOSITORY_OWNER = "repositoryOwner";
+        public static final String NAME_REPOSITORIES = "repositories";
+        public static final String NAME_REPOSITORY = "repository";
+        public static final String NAME_VIEWER = "viewer";
+    }
+
 }

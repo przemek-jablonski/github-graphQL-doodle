@@ -13,16 +13,16 @@ import android.view.ViewGroup;
 
 import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.adapters.RepositoriesViewAdapter;
+import com.android.szparag.github_graphql_doodle.backend.models.Repository;
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlNodeObject;
 import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
 import com.android.szparag.github_graphql_doodle.decorators.HorizontalSeparator;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
+import com.android.szparag.github_graphql_doodle.utils.Constants;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
 import com.android.szparag.github_graphql_doodle.views.contracts.GithubListView;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -88,55 +88,6 @@ public class GithubListFragment extends Fragment implements GithubListView {
     @Override
     public void onResume() {
         super.onResume();
-//        GraphQLObjectType queryType = newObject()
-//                .name("helloWorldQuery")
-//                .field(newFieldDefinition()
-//                        .type(GraphQLString)
-//                        .name("hello")
-//                        .staticValue("world"))
-//                .build();
-//
-//        GraphQLSchema schema = GraphQLSchema.newSchema()
-//                .query(queryType)
-//                .build();
-
-
-//        Map<String, Object> result = (Map<String, Object>) new GraphQL(schema).execute("{hello}").getData();
-
-//        GsonConverterFactory
-
-//        textView.setText(result.toString());
-
-//        GraphQLObjectType queryType2 = newObject()
-//                .name("repositoryOwner")
-//                .field(newFieldDefinition()
-//                        .type(GraphQLString)
-//                        .name("login"))
-//                .field(newFieldDefinition()
-//                        .type(GraphQLString)
-//                        .name("avatarURL"))
-//                .build();
-//
-//        GraphQLSchema graphQLSchema2 = GraphQLSchema.newSchema()
-//                .query(queryType2)
-//                .build();
-
-////        textView.setText(queryType2.toString());
-//        textView2.setText(graphQLSchema2.getAllTypesAsList().toString());
-////        textView3.setText(graphQLSchema2.getDictionary().toString());
-        RepositoryOwner repositoryOwner = new RepositoryOwner("repositoryOwner", true, "ReactiveX");
-
-//        service.getGraphData(repositoryOwner, new Callback<GraphqlResponseObject>() {
-//                    @Override
-//                    public void onResponse(Call<GraphqlResponseObject> call, Response<GraphqlResponseObject> response) {
-//                        GraphqlResponseObject obj = response.body();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<GraphqlResponseObject> call, Throwable t) {
-//                    }
-//                }
-//        );
     }
 
     @Override
@@ -204,7 +155,7 @@ public class GithubListFragment extends Fragment implements GithubListView {
     }
 
     @Override
-    public void updateRepositoriesListView(List<GraphqlNodeObject> repositories) {
+    public void updateRepositoriesListView(List<Repository> repositories) {
         showRepositoriesListView();
         repositoriesAdapter.updateItems(repositories);
 

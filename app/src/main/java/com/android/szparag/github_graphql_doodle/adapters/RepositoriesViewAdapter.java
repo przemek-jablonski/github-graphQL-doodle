@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.szparag.github_graphql_doodle.R;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlNodeObject;
+import com.android.szparag.github_graphql_doodle.backend.models.Repository;
+import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
  * Created by ciemek on 06/11/2016.
  */
 
-public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<GraphqlNodeObject> {
+public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<Repository> {
 
     public RepositoriesViewAdapter(@Nullable RecyclerOnPosClickListener clickListener) {
         super(clickListener);
@@ -41,16 +42,16 @@ public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<GraphqlNode
     }
 
     private void onBindViewHolder(RepositoriesViewHolder holder, int position) {
-        GraphqlNodeObject item = items.get(position);
+        Repository item = items.get(position);
 
         holder.name.setText(item.getName());
         holder.desc.setText(item.getDescription());
-        holder.path.setText(item.getPath());
-        holder.stats.setText(
-                        item.getForks().totalCount + " | " +
-                        item.getStargazers().totalCount + " | " +
-                        item.getWatchers().totalCount
-        );
+        holder.path.setText(item.getUrl());
+//        holder.stats.setText(
+//                        item.getForks().totalCount + " | " +
+//                        item.getStargazers().totalCount + " | " +
+//                        item.getWatchers().totalCount
+//        );
 
     }
 

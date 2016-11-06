@@ -55,118 +55,118 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
     }
 
 
-
-    public String convertGraphqlObjectToString(GraphqlBaseObject graphqlBaseObject) {
-
-        String serializedValueString = insertExpression(
-                buildGraphqlQuery(
-                        graphqlBaseObject.getSerializableName(),
-                        graphqlBaseObject.hasArguments(),
-                        graphqlBaseObject.getArgKey(),
-                        graphqlBaseObject.getArgValue()),
-                insertExpression(
-                        buildGraphqlFields(
-                                graphqlBaseObject
-                        )
-                )
-        );
-
-        return serializedValueString;
-    }
-
-    /**
-     * Builds 'fields' part of GraphQL query.
-     * Takes a graph object (GraphqlBaseObject), seeks all relevant fields to fill and puts them inside
-     * a query.
-     * @param graphqlBaseObject base class that all primary graph objects should extend from
-     * @return correctly formatted string with fields declaration
-     */
-    private String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) /*throws IllegalAccessException*/ {
-        Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
-
-        StringBuilder queryFieldsBuilder = new StringBuilder();
-        for (int i = 0; i < fields.length; ++i) {
-            if (fields[i].getClass().isAssignableFrom(GraphqlBaseObject.class)) {
-
-                GraphqlBaseObject childField = null;
-                try {
-                    childField = (GraphqlBaseObject) fields[i].get(graphqlBaseObject);
-                } catch (IllegalAccessException exc) {
-                    exc.printStackTrace();
-                    continue; //if we can't cast, field cannot be serialized for graph, skipping
-                }
-
-                buildGraphqlQuery(
-                        childField.getSerializableName(),
-                        childField.hasArguments(),
-                        childField.getArgKey(),
-                        childField.getArgValue()
-                );
-
-                if (childField.hasArguments() && Computation.isNumber(childField.getArgValue())) {
-                    //egdes - node - class (fields)
-                    queryFieldsBuilder.append(
-                            insertExpression("edges",
-                                    insertExpression("node",
-                                            insertExpression(buildGraphqlFields(childField))
-                                    )
-                            )
-                    );
-                } else {
-                    queryFieldsBuilder.append(insertExpression(buildGraphqlFields(childField)));
-                    //class (fields)
-                }
-            } else {
-                queryFieldsBuilder.append(fields[i].getName());
-            }
-            if (i != fields.length-1) {
-                queryFieldsBuilder.append(" ");
-            }
-        }
-        return queryFieldsBuilder.toString();
-    }
-
-    /**
-     * Building 'query' part of GraphQL Query (stuff like 'repositories(first:5)'.
-     * Hides syntax stuff from user.
-     * @param serializableName name of query / parameter
-     * @param arguments whether query should take some arguments on the input
-     * @param argumentKey argument key (login/first/last/after etc)
-     * @param argumentValue argument value
-     * @return correctly formatted string with query
-     */
-    //todo: map instead of single argument (key-val) pair
-    private String buildGraphqlQuery(String serializableName, boolean arguments, String argumentKey, String argumentValue) {
-        StringBuilder query = new StringBuilder();
-        query.append(serializableName);
-        if(arguments) {
-            query.append(ARGUMENTS_START)
-                    .append(argumentKey)
-                    .append(ARGUMENT_KEY_VALUE_SEPARATOR)
-                    .append("\"")
-                    .append(argumentValue)
-                    .append("\"")
-                    .append(ARGUMENTS_END);
-        }
-        return query.toString();
-    }
-
-    /**
-     * Surrounding expression(s) with correct curly braces on both sides
-     * @param expressions GraphQL expressions (queries, field declarations, enums etc)
-     * @return correcly formatted expression(s) as a String with braces, ready to POST.
-     */
-    private String insertExpression(String... expressions) {
-        StringBuilder expressionWithBraces = new StringBuilder();
-
-        expressionWithBraces.append(EXPRESSION_START);
-//        expressionWithBraces.insert(0, EXPRESSION_START);
-        for (int e = 0; e < expressions.length; ++e) {
-            expressionWithBraces.append(expressions[e]);
-        }
-        expressionWithBraces.append(EXPRESSION_END);
-
-        return expressionWithBraces.toString();
-    }
+//
+//    public String convertGraphqlObjectToString(GraphqlBaseObject graphqlBaseObject) {
+//
+//        String serializedValueString = insertExpression(
+//                buildGraphqlQuery(
+//                        graphqlBaseObject.getSerializableName(),
+//                        graphqlBaseObject.hasArguments(),
+//                        graphqlBaseObject.getArgKey(),
+//                        graphqlBaseObject.getArgValue()),
+//                insertExpression(
+//                        buildGraphqlFields(
+//                                graphqlBaseObject
+//                        )
+//                )
+//        );
+//
+//        return serializedValueString;
+//    }
+//
+//    /**
+//     * Builds 'fields' part of GraphQL query.
+//     * Takes a graph object (GraphqlBaseObject), seeks all relevant fields to fill and puts them inside
+//     * a query.
+//     * @param graphqlBaseObject base class that all primary graph objects should extend from
+//     * @return correctly formatted string with fields declaration
+//     */
+//    private String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) /*throws IllegalAccessException*/ {
+//        Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
+//
+//        StringBuilder queryFieldsBuilder = new StringBuilder();
+//        for (int i = 0; i < fields.length; ++i) {
+//            if (fields[i].getClass().isAssignableFrom(GraphqlBaseObject.class)) {
+//
+//                GraphqlBaseObject childField = null;
+//                try {
+//                    childField = (GraphqlBaseObject) fields[i].get(graphqlBaseObject);
+//                } catch (IllegalAccessException exc) {
+//                    exc.printStackTrace();
+//                    continue; //if we can't cast, field cannot be serialized for graph, skipping
+//                }
+//
+//                buildGraphqlQuery(
+//                        childField.getSerializableName(),
+//                        childField.hasArguments(),
+//                        childField.getArgKey(),
+//                        childField.getArgValue()
+//                );
+//
+//                if (childField.hasArguments() && Computation.isNumber(childField.getArgValue())) {
+//                    //egdes - node - class (fields)
+//                    queryFieldsBuilder.append(
+//                            insertExpression("edges",
+//                                    insertExpression("node",
+//                                            insertExpression(buildGraphqlFields(childField))
+//                                    )
+//                            )
+//                    );
+//                } else {
+//                    queryFieldsBuilder.append(insertExpression(buildGraphqlFields(childField)));
+//                    //class (fields)
+//                }
+//            } else {
+//                queryFieldsBuilder.append(fields[i].getName());
+//            }
+//            if (i != fields.length-1) {
+//                queryFieldsBuilder.append(" ");
+//            }
+//        }
+//        return queryFieldsBuilder.toString();
+//    }
+//
+//    /**
+//     * Building 'query' part of GraphQL Query (stuff like 'repositories(first:5)'.
+//     * Hides syntax stuff from user.
+//     * @param serializableName name of query / parameter
+//     * @param arguments whether query should take some arguments on the input
+//     * @param argumentKey argument key (login/first/last/after etc)
+//     * @param argumentValue argument value
+//     * @return correctly formatted string with query
+//     */
+//    //todo: map instead of single argument (key-val) pair
+//    private String buildGraphqlQuery(String serializableName, boolean arguments, String argumentKey, String argumentValue) {
+//        StringBuilder query = new StringBuilder();
+//        query.append(serializableName);
+//        if(arguments) {
+//            query.append(ARGUMENTS_START)
+//                    .append(argumentKey)
+//                    .append(ARGUMENT_KEY_VALUE_SEPARATOR)
+//                    .append("\"")
+//                    .append(argumentValue)
+//                    .append("\"")
+//                    .append(ARGUMENTS_END);
+//        }
+//        return query.toString();
+//    }
+//
+//    /**
+//     * Surrounding expression(s) with correct curly braces on both sides
+//     * @param expressions GraphQL expressions (queries, field declarations, enums etc)
+//     * @return correcly formatted expression(s) as a String with braces, ready to POST.
+//     */
+//    private String insertExpression(String... expressions) {
+//        StringBuilder expressionWithBraces = new StringBuilder();
+//
+//        expressionWithBraces.append(EXPRESSION_START);
+////        expressionWithBraces.insert(0, EXPRESSION_START);
+//        for (int e = 0; e < expressions.length; ++e) {
+//            expressionWithBraces.append(expressions[e]);
+//        }
+//        expressionWithBraces.append(EXPRESSION_END);
+//
+//        return expressionWithBraces.toString();
+//    }
 
 }
