@@ -1,13 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
-import com.android.szparag.github_graphql_doodle.backend.models.Repository;
-import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlResponseObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

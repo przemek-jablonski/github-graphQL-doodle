@@ -1,15 +1,11 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.utils.Computation;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 
 import okhttp3.MediaType;

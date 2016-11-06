@@ -2,12 +2,11 @@ package com.android.szparag.github_graphql_doodle.backend.models;
 
 import android.support.annotation.Nullable;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlConnectionObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlEdgeObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlConnectionObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlEdgeObject;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.*;
 
@@ -18,7 +17,7 @@ public class Repository extends GraphqlBaseObject {
 
 
     public Repository(@Nullable LinkedHashMap<String, String> args) {
-        super("repository");
+        super(NAME_REPOSITORY);
         super.availableArgs = new String[]{
                 ARGUMENT_FIRST,
                 ARGUMENT_AFTER,
@@ -37,10 +36,13 @@ public class Repository extends GraphqlBaseObject {
     private String name;
     private String url;
 
-    private RepositoryConnection    forks;
-    private PullRequestConnection   pullRequests;
-    private StargazerConnection     stargazers;
-    private UserConnection          watchers;
+    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> forks;
+//    private PullRequestConnection   pullRequests;
+    private GraphqlConnectionObject<GraphqlEdgeObject<PullRequest>> pullRequests;
+//    private StargazerConnection     stargazers;
+    private GraphqlConnectionObject<GraphqlEdgeObject<User>> stargazers;
+//    private UserConnection          watchers;
+    private GraphqlConnectionObject<GraphqlEdgeObject<User>> watchers;
 
 
     public String[] getAvailableArgs() {
@@ -63,19 +65,4 @@ public class Repository extends GraphqlBaseObject {
         return url;
     }
 
-    public RepositoryConnection getForks() {
-        return forks;
-    }
-
-    public PullRequestConnection getPullRequests() {
-        return pullRequests;
-    }
-
-    public StargazerConnection getStargazers() {
-        return stargazers;
-    }
-
-    public UserConnection getWatchers() {
-        return watchers;
-    }
 }

@@ -1,11 +1,5 @@
 package com.android.szparag.github_graphql_doodle;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-
-import org.junit.Test;
-
-import java.lang.reflect.Field;
-
 import static junit.framework.Assert.assertEquals;
 
 /**

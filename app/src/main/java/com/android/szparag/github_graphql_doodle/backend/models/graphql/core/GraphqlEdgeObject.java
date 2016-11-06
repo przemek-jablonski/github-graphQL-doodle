@@ -1,4 +1,4 @@
-package com.android.szparag.github_graphql_doodle.backend.models.graphql;
+package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
 /**
  * Created by ciemek on 06/11/2016.

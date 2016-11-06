@@ -1,6 +1,6 @@
 package com.android.szparag.github_graphql_doodle.backend.models;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
 
 /**
  * Created by ciemek on 06/11/2016.

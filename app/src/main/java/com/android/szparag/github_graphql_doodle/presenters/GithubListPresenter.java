@@ -1,7 +1,7 @@
 package com.android.szparag.github_graphql_doodle.presenters;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlResponseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlResponseObject;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;

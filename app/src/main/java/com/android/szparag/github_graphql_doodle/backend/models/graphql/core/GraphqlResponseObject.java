@@ -1,7 +1,5 @@
-package com.android.szparag.github_graphql_doodle.backend.models.graphql;
+package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
-import com.android.szparag.github_graphql_doodle.utils.Constants;
-import com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants;
 import com.google.gson.annotations.SerializedName;
 
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.NAME_REPOSITORIES;

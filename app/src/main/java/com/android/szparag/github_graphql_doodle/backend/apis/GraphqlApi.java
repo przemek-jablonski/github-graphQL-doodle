@@ -1,8 +1,8 @@
 package com.android.szparag.github_graphql_doodle.backend.apis;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.GraphqlResponseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlResponseObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
