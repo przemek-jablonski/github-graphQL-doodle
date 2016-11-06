@@ -37,12 +37,10 @@ public class Repository extends GraphqlBaseObject {
     private String name;
     private String url;
 
-//    private RepositoryConnection    forks;
-//    private List<GraphqlConnectionObject<GraphqlEdgeObject<Repository>>> forks;
-
-//    private PullRequestConnection   pullRequests;
-//    private StargazerConnection     stargazers;
-//    private UserConnection          watchers;
+    private RepositoryConnection    forks;
+    private PullRequestConnection   pullRequests;
+    private StargazerConnection     stargazers;
+    private UserConnection          watchers;
 
 
     public String[] getAvailableArgs() {
@@ -65,7 +63,19 @@ public class Repository extends GraphqlBaseObject {
         return url;
     }
 
-//    public List<GraphqlConnectionObject<GraphqlEdgeObject<Repository>>> getForks() {
-//        return forks;
-//    }
+    public RepositoryConnection getForks() {
+        return forks;
+    }
+
+    public PullRequestConnection getPullRequests() {
+        return pullRequests;
+    }
+
+    public StargazerConnection getStargazers() {
+        return stargazers;
+    }
+
+    public UserConnection getWatchers() {
+        return watchers;
+    }
 }
