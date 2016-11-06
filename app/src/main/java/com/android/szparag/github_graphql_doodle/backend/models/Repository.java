@@ -35,10 +35,10 @@ public class Repository extends GraphqlBaseObject {
     private String name;
     private String url;
 
-    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>>  forks;
-    private GraphqlConnectionObject<GraphqlEdgeObject<PullRequest>> pullRequests;
-    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        stargazers;
-    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        watchers;
+//    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>>  forks;
+//    private GraphqlConnectionObject<GraphqlEdgeObject<PullRequest>> pullRequests;
+//    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        stargazers;
+//    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        watchers;
 
 
     public String[] getAvailableArgs() {

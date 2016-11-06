@@ -35,8 +35,8 @@ public class RepositoryOwner extends GraphqlBaseObject {
     private String login;
     private String path;
 
-    @GraphqlFetchMaxLevel(maxLevel=2)
-    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> repositories;
+//    @GraphqlFetchMaxLevel(maxLevel=2)
+//    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> repositories;
 
     @GraphqlDontFetch
     private Repository repository;  //todo: figure out some solution for this

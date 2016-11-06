@@ -11,7 +11,6 @@ import java.util.List;
 @GraphqlType
 public class GraphqlConnectionObject<E extends GraphqlEdgeObject> {
 
-
     private List<E> edges;
 //    private PageInfo pageInfo;
     private int totalCount;

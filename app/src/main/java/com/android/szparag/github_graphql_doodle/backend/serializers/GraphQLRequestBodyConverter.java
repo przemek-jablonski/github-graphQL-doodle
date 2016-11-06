@@ -88,8 +88,8 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 //        return json;
 //    }
 
-    public String convertBaseObjectToQuery(GraphqlBaseObject graphqlBaseObject) {
-        stringBuilder.append(EXPRESSION_START);
+    public String convertBaseObjectToQuery(GraphqlBaseObject graphqlBaseObject, boolean recursivelyCalled) {
+        if (!recursivelyCalled) stringBuilder.append(EXPRESSION_START);
 
         makeQuery(graphqlBaseObject);
         stringBuilder.append(EXPRESSION_START);
@@ -97,6 +97,7 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
         Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
 
         for (int f = 0; f < fields.length; ++f) {
+            Field field = fields[f];
 //            boolean isAssignable = fields[f].getClass().isAssignableFrom(GraphqlBaseObject.class);
 //            boolean isAssignable = ;
 
@@ -117,17 +118,28 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 //            String name1 = fields[f].getType().getSuperclass().getName();
 //
 //            boolean annot =
-//            boolean assignable = fields[f].getType().isAssignableFrom(GraphqlBaseObject.class);
-            if (fields[f].getType().isAnnotationPresent(GraphqlType.class)
-                    || fields[f].getType().getSuperclass().isAnnotationPresent(GraphqlType.class)) {
-                stringBuilder.append(FIELDS_SEPARATOR).append("CUSTOM!").append(FIELDS_SEPARATOR);
+//            boolean assignable = fields[f].getType().isAssignableFrom(GraphqlBaseObject.class)
+            if (field.getType().isAnnotationPresent(GraphqlType.class)
+                    || field.getType().getSuperclass().isAnnotationPresent(GraphqlType.class)) {
+                stringBuilder.append(FIELDS_SEPARATOR);
+
+                try {
+                    field.setAccessible(true);
+                    convertBaseObjectToQuery(((GraphqlBaseObject) field.get(graphqlBaseObject)), true);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } finally {
+                    field.setAccessible(false);
+                }
+
+                stringBuilder.append(FIELDS_SEPARATOR);
             } else {
-                stringBuilder.append(FIELDS_SEPARATOR).append(fields[f].getName()).append(FIELDS_SEPARATOR);
+                stringBuilder.append(FIELDS_SEPARATOR).append(field.getName()).append(FIELDS_SEPARATOR);
             }
         }
 
 
-        stringBuilder.append(EXPRESSION_END);
+        if (!recursivelyCalled) stringBuilder.append(EXPRESSION_END);
 
         stringBuilder.append(EXPRESSION_END);
         return stringBuilder.toString();

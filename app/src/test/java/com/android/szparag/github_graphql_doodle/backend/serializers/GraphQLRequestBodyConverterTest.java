@@ -30,7 +30,7 @@ public class GraphQLRequestBodyConverterTest {
 
     @Test
     public void graphqlSerializationTesting() {
-        String querystring = converter.convertBaseObjectToQuery(owner);
+        String querystring = converter.convertBaseObjectToQuery(owner, false);
         System.out.println(querystring);
     }
 
