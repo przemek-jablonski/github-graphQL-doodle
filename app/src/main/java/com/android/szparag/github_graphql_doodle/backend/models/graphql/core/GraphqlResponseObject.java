@@ -1,6 +1,6 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlType;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLType;
 import com.google.gson.annotations.SerializedName;
 
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.NAME_REPOSITORIES;
@@ -11,16 +11,16 @@ import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlC
 /**
  * Created by ciemek on 05/11/2016.
  */
-@GraphqlType
-public class GraphqlResponseObject<T extends GraphqlBaseObject> extends GraphqlBaseObject {
+@GraphQLType
+public class GraphQLResponseObject<T extends GraphQLBaseObject> extends GraphQLBaseObject {
 
-    private GraphqlDataObject<T> data;
+    private GraphQLDataObject<T> data;
 
-    public GraphqlResponseObject() {
+    public GraphQLResponseObject() {
         super("");
     }
 
-    public GraphqlDataObject<T> getData() {
+    public GraphQLDataObject<T> getData() {
         return data;
     }
 
@@ -30,8 +30,8 @@ public class GraphqlResponseObject<T extends GraphqlBaseObject> extends GraphqlB
 
 
 
-    public class GraphqlDataObject<T extends GraphqlBaseObject> extends GraphqlBaseObject {
-        public GraphqlDataObject() {
+    public class GraphQLDataObject<T extends GraphQLBaseObject> extends GraphQLBaseObject {
+        public GraphQLDataObject() {
             super("");
         }
         @SerializedName(

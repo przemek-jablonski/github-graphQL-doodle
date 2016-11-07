@@ -1,8 +1,8 @@
 package com.android.szparag.github_graphql_doodle.backend.services;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlResponseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLResponseObject;
 
 import retrofit2.Callback;
 
@@ -12,8 +12,8 @@ import retrofit2.Callback;
 
 public interface GraphqlService {
 
-    void getGraphData(GraphqlBaseObject graphqlBaseObject, Callback<GraphqlResponseObject<GraphqlBaseObject>> callback);
+    void getGraphData(GraphQLBaseObject graphQLBaseObject, Callback<GraphQLResponseObject<GraphQLBaseObject>> callback);
 
-    void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphqlResponseObject<RepositoryOwner>> callback);
+    void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphQLResponseObject<RepositoryOwner>> callback);
 
 }

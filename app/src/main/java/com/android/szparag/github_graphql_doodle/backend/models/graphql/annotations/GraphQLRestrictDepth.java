@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface GraphqlFetchMaxLevel {
+public @interface GraphQLRestrictDepth {
     int maxLevel() default 1;
 }

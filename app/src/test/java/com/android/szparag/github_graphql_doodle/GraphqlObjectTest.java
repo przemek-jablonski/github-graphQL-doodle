@@ -42,7 +42,7 @@ public class GraphqlObjectTest {
 //
 //    //todo: delete that (propably already exists in code)
 //
-//    private StringBuilder buildRequestString(StringBuilder serialized, GraphqlBaseObject graphqlBaseObject) {
+//    private StringBuilder buildRequestString(StringBuilder serialized, GraphQLBaseObject graphqlBaseObject) {
 //        serialized.append(
 //                insertExpression(
 //                        buildGraphqlQuery(
@@ -61,7 +61,7 @@ public class GraphqlObjectTest {
 //        return serialized;
 //    }
 //
-//    public String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) {
+//    public String buildGraphqlFields(GraphQLBaseObject graphqlBaseObject) {
 //        Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
 //
 //        StringBuilder queryFieldsBuilder = new StringBuilder();

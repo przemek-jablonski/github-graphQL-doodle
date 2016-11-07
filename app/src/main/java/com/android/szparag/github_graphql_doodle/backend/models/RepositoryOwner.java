@@ -2,11 +2,11 @@ package com.android.szparag.github_graphql_doodle.backend.models;
 
 import android.support.annotation.Nullable;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlDontFetch;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlFetchMaxLevel;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlConnectionObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlEdgeObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLDontFetch;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLRestrictDepth;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLConnectionObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLEdgeObject;
 
 import java.util.LinkedHashMap;
 
@@ -17,7 +17,7 @@ import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlC
  * Created by ciemek on 06/11/2016.
  */
 
-public class RepositoryOwner extends GraphqlBaseObject {
+public class RepositoryOwner extends GraphQLBaseObject {
 
     public RepositoryOwner(@Nullable LinkedHashMap<String, String> args) {
         super(NAME_REPOSITORY_OWNER);
@@ -25,7 +25,7 @@ public class RepositoryOwner extends GraphqlBaseObject {
                 ARGUMENT_LOGIN
         };
         checkArguments(args);
-        repository = new Repository(null);
+        repositories = new GraphQLConnectionObject<>();
     }
 
 
@@ -35,10 +35,10 @@ public class RepositoryOwner extends GraphqlBaseObject {
     private String login;
     private String path;
 
-//    @GraphqlFetchMaxLevel(maxLevel=2)
-//    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>> repositories;
+    @GraphQLRestrictDepth(maxLevel = 2)
+    private GraphQLConnectionObject<GraphQLEdgeObject<Repository>> repositories;
 
-    @GraphqlDontFetch
+    @GraphQLDontFetch
     private Repository repository;  //todo: figure out some solution for this
 
 

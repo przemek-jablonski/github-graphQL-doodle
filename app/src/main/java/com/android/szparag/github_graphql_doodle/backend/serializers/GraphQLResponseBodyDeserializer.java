@@ -1,7 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * Created by ciemek on 05/11/2016.
  */
 
-public class GraphQLResponseBodyDeserializer<T extends GraphqlBaseObject> implements JsonDeserializer<T> {
+public class GraphQLResponseBodyDeserializer<T extends GraphQLBaseObject> implements JsonDeserializer<T> {
 
     Class clazz;
 

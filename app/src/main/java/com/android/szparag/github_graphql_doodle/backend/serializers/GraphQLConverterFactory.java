@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
+import graphql.schema.GraphQLObjectType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -35,7 +36,8 @@ public final class GraphQLConverterFactory extends Converter.Factory {
 
     public GraphQLConverterFactory() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.registerTypeAdapter(GraphqlBaseObject.class, new GraphQLResponseBodyDeserializer<>(GraphqlBaseObject.class));
+        gsonBuilder.registerTypeAdapter(GraphQLObjectType.class, new GraphQLQueryConverter());
+//        gsonBuilder.registerTypeAdapter(GraphQLBaseObject.class, new GraphQLResponseBodyDeserializer<>(GraphQLBaseObject.class));
 //        gsonBuilder.registerTypeAdapter(RepositoryOwner.class, new GraphQLResponseBodyDeserializer<RepositoryOwner>(RepositoryOwner.class));
 //        gsonBuilder.registerTypeAdapter(Repository.class, new GraphQLResponseBodyDeserializer<Repository>(Repository.class));
         gson = gsonBuilder.create();
@@ -55,6 +57,7 @@ public final class GraphQLConverterFactory extends Converter.Factory {
             Annotation[] annotations,
             Retrofit retrofit) {
 
+        //todo: maybe get rid of GSON?
         return gsonConverterFactory.responseBodyConverter(type, annotations, retrofit);
 //        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
 //        return new GsonResponseBodyConverter<>(gson, adapter);

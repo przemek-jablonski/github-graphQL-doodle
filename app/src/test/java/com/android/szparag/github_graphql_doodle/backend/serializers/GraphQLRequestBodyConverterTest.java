@@ -1,6 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.queries.RepositoryOwnerQueryFull;
 import com.android.szparag.github_graphql_doodle.utils.Constants;
 
 import org.junit.Before;
@@ -19,6 +20,7 @@ public class GraphQLRequestBodyConverterTest {
     GraphQLRequestBodyConverter converter;
     RepositoryOwner owner;
 
+
     @Before
     public void setup() {
         converter = new GraphQLRequestBodyConverter();
@@ -30,7 +32,10 @@ public class GraphQLRequestBodyConverterTest {
 
     @Test
     public void graphqlSerializationTesting() {
-        String querystring = converter.convertBaseObjectToQuery(owner, false);
+        GraphQLQueryConverter conv = new GraphQLQueryConverter();
+        RepositoryOwnerQueryFull q = new RepositoryOwnerQueryFull("login", "\"ReactiveX\"", "first", "30"); //here should be like ARGS.TYPE.FIRST
+
+        String querystring = conv.convertBaseObjectToquery(q.getQuery());
         System.out.println(querystring);
     }
 

@@ -1,22 +1,24 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphqlType;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
-import com.google.gson.JsonObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLDontFetch;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLType;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import graphql.GraphQL;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Converter;
+
 
 /**
  * Created by ciemek on 05/11/2016.
@@ -36,8 +38,6 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
     private final String ARGUMENT_APPEND_NEXT = ",";
     private final String QUERY = "query";
     private final String FIELDS_SEPARATOR = " ";
-
-
     private StringBuilder stringBuilder;
 
     public GraphQLRequestBodyConverter() {
@@ -52,10 +52,10 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 
         JSONObject json = new JSONObject();
 
-        if (value instanceof GraphqlBaseObject) {
+        if (value instanceof GraphQLBaseObject) {
             try {
 //                skonczylem na tym: {repositoryOwner(login:"ReactiveX"){avatarURL login path url repositories}}
-//                json.put(QUERY, convertGraphqlObjectToString(((GraphqlBaseObject) value)));
+//                json.put(QUERY, convertGraphqlObjectToString(((GraphQLBaseObject) value)));
                 json.put(QUERY, "{repositoryOwner(login:\"ReactiveX\"){avatarURL login path url repositories(first: 5) {edges{node{name path description forks {totalCount} watchers {totalCount} stargazers {totalCount} }}}}}");
             } catch (JSONException e) {
                 e.printStackTrace(); //todo: something more elaborate here
@@ -64,12 +64,12 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 
         return RequestBody.create(MEDIA_TYPE, json.toString());
 
-//        if (value instanceof GraphqlBaseObject) {
+//        if (value instanceof GraphQLBaseObject) {
 //            StringBuilder stringBuilder = new StringBuilder();
 //            return RequestBody.create(
 //                    MEDIA_TYPE,
 //                    convertQueryToJson(
-//                            convertBaseObjectToQuery(stringBuilder, ((GraphqlBaseObject) value)))
+//                            convertBaseObjectToQuery(stringBuilder, ((GraphQLBaseObject) value)))
 //                            .toString()
 //            );
 //        }
@@ -88,17 +88,16 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 //        return json;
 //    }
 
-    public String convertBaseObjectToQuery(GraphqlBaseObject graphqlBaseObject, boolean recursivelyCalled) {
+    public String convertBaseObjectToQuery(GraphQLBaseObject graphQLBaseObject, boolean recursivelyCalled) {
         if (!recursivelyCalled) stringBuilder.append(EXPRESSION_START);
 
-        makeQuery(graphqlBaseObject);
+        makeQuery(graphQLBaseObject);
         stringBuilder.append(EXPRESSION_START);
 
-        Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
+        Field[] fields = graphQLBaseObject.getClass().getDeclaredFields();
 
         for (int f = 0; f < fields.length; ++f) {
-            Field field = fields[f];
-//            boolean isAssignable = fields[f].getClass().isAssignableFrom(GraphqlBaseObject.class);
+//            boolean isAssignable = fields[f].getClass().isAssignableFrom(GraphQLBaseObject.class);
 //            boolean isAssignable = ;
 
 //            String name = fields[f].getGenericType().getClass().getName();
@@ -113,43 +112,75 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 //            String name9 = fields[f].getClass().getGenericSuperclass().getClass().getName();
 ////            String name10 = fields[f].getClass().getDeclaringClass().getName();
 
-//            if (fields[f].getDeclaringClass().getSuperclass().isAssignableFrom(GraphqlBaseObject.class)) {
+//            if (fields[f].getDeclaringClass().getSuperclass().isAssignableFrom(GraphQLBaseObject.class)) {
 //            String name = fields[f].getType().getName();
 //            String name1 = fields[f].getType().getSuperclass().getName();
 //
 //            boolean annot =
-//            boolean assignable = fields[f].getType().isAssignableFrom(GraphqlBaseObject.class)
-            if (field.getType().isAnnotationPresent(GraphqlType.class)
-                    || field.getType().getSuperclass().isAnnotationPresent(GraphqlType.class)) {
-                stringBuilder.append(FIELDS_SEPARATOR);
+//            boolean assignable = fields[f].getType().isAssignableFrom(GraphQLBaseObject.class)
+            Type actualType = fields[f].getType();
+//            Type generic = fields[f].getType().g;
+            Type param1;
+            Type param2;
+            Object superobject;
+            Type parametrizedType = fields[f].getGenericType();
+            if (parametrizedType instanceof ParameterizedType) {
+                param1 = ((ParameterizedType) parametrizedType).getActualTypeArguments()[0];
+                if (param1 instanceof ParameterizedType) {
+                    param2 = ((ParameterizedType) param1).getActualTypeArguments()[0];
+                    System.out.println(param2.toString() + " / " + param2.toString()); //wee, Repository here
 
+                    try {
+                        Class<?> clazz = Class.forName(param2.toString());
+                        clazz.cast(param2);
+//                        Constructor<?> constr = clazz.getConstructor;
+                        superobject = clazz.newInstance();
+                        String asd = "asd";
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
+
+            Type superType = fields[f].getType().getSuperclass();
+
+            if (graphqlTypeCheck(fields[f])) {
+//                if (fields[f].isAnnotationPresent(GraphQLDontFetch.class)) {
+//                    continue;
+//                }
+
+                stringBuilder.append(FIELDS_SEPARATOR);
                 try {
-                    field.setAccessible(true);
-                    convertBaseObjectToQuery(((GraphqlBaseObject) field.get(graphqlBaseObject)), true);
+                    fields[f].setAccessible(true);
+                    convertBaseObjectToQuery(((GraphQLBaseObject) fields[f].get(graphQLBaseObject)), true);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } finally {
-                    field.setAccessible(false);
+                    fields[f].setAccessible(false);
                 }
-
                 stringBuilder.append(FIELDS_SEPARATOR);
             } else {
-                stringBuilder.append(FIELDS_SEPARATOR).append(field.getName()).append(FIELDS_SEPARATOR);
+                stringBuilder.append(FIELDS_SEPARATOR).append(fields[f].getName()).append(FIELDS_SEPARATOR);
             }
         }
-
-
         if (!recursivelyCalled) stringBuilder.append(EXPRESSION_END);
+
 
         stringBuilder.append(EXPRESSION_END);
         return stringBuilder.toString();
     }
 
-    private void makeQuery(GraphqlBaseObject graphqlBaseObject) {
-        stringBuilder.append(graphqlBaseObject.getSerializableName());
+    private void makeQuery(GraphQLBaseObject graphQLBaseObject) {
+        stringBuilder.append(graphQLBaseObject.getSerializableName());
 
-        if (graphqlBaseObject.getArgumentMap() != null) {
-            makeArguments(graphqlBaseObject.getArgumentMap());
+        if (graphQLBaseObject.getArgumentMap() != null) {
+            makeArguments(graphQLBaseObject.getArgumentMap());
         }
     }
 
@@ -164,9 +195,29 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
         stringBuilder.append(ARGUMENTS_END);
     }
 
+    private boolean graphqlTypeCheck(Field field) {
+        if (field.getType().isAnnotationPresent(GraphQLType.class)){
+            return true;
+        }
+        if (field.getType().getSuperclass() != null) {
+            if (field.getType().getSuperclass().isAnnotationPresent(GraphQLType.class)) {
+                return true;
+            }
+        }
+
+        if (field.isAnnotationPresent(GraphQLDontFetch.class)) { //todo: is this needed?
+            return false;
+        }
+
+            if(field.getName() == "edges") {
+            return true;
+        }
+
+        return false;
+    }
 
 //
-//    public String convertGraphqlObjectToString(GraphqlBaseObject graphqlBaseObject) {
+//    public String convertGraphqlObjectToString(GraphQLBaseObject graphqlBaseObject) {
 //
 //        String serializedValueString = insertExpression(
 //                buildGraphqlQuery(
@@ -186,21 +237,21 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
 
 //    /**
 //     * Builds 'fields' part of GraphQL query.
-//     * Takes a graph object (GraphqlBaseObject), seeks all relevant fields to fill and puts them inside
+//     * Takes a graph object (GraphQLBaseObject), seeks all relevant fields to fill and puts them inside
 //     * a query.
 //     * @param graphqlBaseObject base class that all primary graph objects should extend from
 //     * @return correctly formatted string with fields declaration
 //     */
-//    private String buildGraphqlFields(GraphqlBaseObject graphqlBaseObject) /*throws IllegalAccessException*/ {
+//    private String buildGraphqlFields(GraphQLBaseObject graphqlBaseObject) /*throws IllegalAccessException*/ {
 //        Field[] fields = graphqlBaseObject.getClass().getDeclaredFields();
 //
 //        StringBuilder queryFieldsBuilder = new StringBuilder();
 //        for (int i = 0; i < fields.length; ++i) {
-//            if (fields[i].getClass().isAssignableFrom(GraphqlBaseObject.class)) {
+//            if (fields[i].getClass().isAssignableFrom(GraphQLBaseObject.class)) {
 //
-//                GraphqlBaseObject childField = null;
+//                GraphQLBaseObject childField = null;
 //                try {
-//                    childField = (GraphqlBaseObject) fields[i].get(graphqlBaseObject);
+//                    childField = (GraphQLBaseObject) fields[i].get(graphqlBaseObject);
 //                } catch (IllegalAccessException exc) {
 //                    exc.printStackTrace();
 //                    continue; //if we can't cast, field cannot be serialized for graph, skipping

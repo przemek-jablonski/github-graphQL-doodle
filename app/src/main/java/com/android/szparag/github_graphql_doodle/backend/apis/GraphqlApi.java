@@ -1,8 +1,8 @@
 package com.android.szparag.github_graphql_doodle.backend.apis;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlResponseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLResponseObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,12 +15,12 @@ import retrofit2.http.POST;
 public interface GraphqlApi {
 
 //    @POST("graphql")
-//    Call<GraphqlResponseObject> getGraphData(@Body GraphqlBaseObject graphqlObject);
+//    Call<GraphQLResponseObject> getGraphData(@Body GraphQLBaseObject graphqlObject);
 
     @POST("graphql")
-    Call<GraphqlResponseObject<GraphqlBaseObject>> getGraphData(@Body GraphqlBaseObject baseObject);
+    Call<GraphQLResponseObject<GraphQLBaseObject>> getGraphData(@Body GraphQLBaseObject baseObject);
 
     @POST("graphql")
-    Call<GraphqlResponseObject<RepositoryOwner>> getGraphData(@Body RepositoryOwner repositoryOwner);
+    Call<GraphQLResponseObject<RepositoryOwner>> getGraphData(@Body RepositoryOwner repositoryOwner);
 
 }

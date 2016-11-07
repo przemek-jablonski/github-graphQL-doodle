@@ -2,9 +2,7 @@ package com.android.szparag.github_graphql_doodle.backend.models;
 
 import android.support.annotation.Nullable;
 
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlConnectionObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlEdgeObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
 
 import java.util.LinkedHashMap;
 
@@ -13,7 +11,7 @@ import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlC
 /**
  * Created by ciemek on 06/11/2016.
  */
-public class Repository extends GraphqlBaseObject {
+public class Repository extends GraphQLBaseObject {
 
     public Repository(@Nullable LinkedHashMap<String, String> args) {
         super(NAME_REPOSITORY);
@@ -35,10 +33,12 @@ public class Repository extends GraphqlBaseObject {
     private String name;
     private String url;
 
-//    private GraphqlConnectionObject<GraphqlEdgeObject<Repository>>  forks;
-//    private GraphqlConnectionObject<GraphqlEdgeObject<PullRequest>> pullRequests;
-//    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        stargazers;
-//    private GraphqlConnectionObject<GraphqlEdgeObject<User>>        watchers;
+
+
+//    private GraphQLConnectionObject<GraphQLEdgeObject<Repository>>  forks;
+//    private GraphQLConnectionObject<GraphQLEdgeObject<PullRequest>> pullRequests;
+//    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        stargazers;
+//    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        watchers;
 
 
     public String[] getAvailableArgs() {

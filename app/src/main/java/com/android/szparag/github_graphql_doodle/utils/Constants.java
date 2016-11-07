@@ -32,6 +32,7 @@ public class Constants {
         public static final String NAME_REPOSITORIES = "repositories";
         public static final String NAME_REPOSITORY = "repository";
         public static final String NAME_VIEWER = "viewer";
+        public static final String NAME_BLANK = "";
     }
 
 }

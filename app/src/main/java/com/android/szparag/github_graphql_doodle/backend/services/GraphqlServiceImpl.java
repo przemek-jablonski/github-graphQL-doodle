@@ -2,8 +2,8 @@ package com.android.szparag.github_graphql_doodle.backend.services;
 
 import com.android.szparag.github_graphql_doodle.backend.apis.GraphqlApi;
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlResponseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLResponseObject;
 
 import retrofit2.Callback;
 
@@ -22,33 +22,33 @@ public class GraphqlServiceImpl implements GraphqlService {
 
 
     @Override
-    public void getGraphData(GraphqlBaseObject graphqlBaseObject, Callback<GraphqlResponseObject<GraphqlBaseObject>> callback) {
-        api.getGraphData(graphqlBaseObject).enqueue(callback);
+    public void getGraphData(GraphQLBaseObject graphQLBaseObject, Callback<GraphQLResponseObject<GraphQLBaseObject>> callback) {
+        api.getGraphData(graphQLBaseObject).enqueue(callback);
     }
 
     @Override
-    public void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphqlResponseObject<RepositoryOwner>> callback) {
+    public void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphQLResponseObject<RepositoryOwner>> callback) {
         api.getGraphData(repositoryOwner).enqueue(callback);
     }
 
 
 //    @Override
-//    public void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphqlResponseObject<RepositoryOwner>> callback) {
+//    public void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphQLResponseObject<RepositoryOwner>> callback) {
 //        api.getGraphData(repositoryOwner).enqueue(callback);
 //    }
 //
 //    @Override
-//    public void getGraphData(GraphqlBaseObject graphqlBaseObject, Callback<GraphqlResponseObject<GraphqlBaseObject>> callback) {
+//    public void getGraphData(GraphQLBaseObject graphqlBaseObject, Callback<GraphQLResponseObject<GraphQLBaseObject>> callback) {
 //        api.getGraphData(graphqlBaseObject).enqueue(callback);
 //    }
 
     //    @Override
-//    public void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphqlResponseObject> callback) {
+//    public void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphQLResponseObject> callback) {
 //        api.getRepositoryOwner(repositoryOwner).enqueue(callback);
 //    }
 
 //    @Override
-//    public void getGraphData(GraphqlBaseObject graphqlObject, Callback<GraphqlResponseObject> callback) {
+//    public void getGraphData(GraphQLBaseObject graphqlObject, Callback<GraphQLResponseObject> callback) {
 //        api.getGraphData(graphqlObject).enqueue(callback);
 //    }
 

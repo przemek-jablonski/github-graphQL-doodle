@@ -1,7 +1,7 @@
 package com.android.szparag.github_graphql_doodle.presenters;
 
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphqlResponseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLResponseObject;
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
@@ -66,13 +66,13 @@ public class GithubListPresenter implements GithubListBasePresenter {
         repositoryOwner = new RepositoryOwner(args);
 
         //todo: maybe this 3 parameters above should go below, into .getGraphData(...)?
-//        service.getGraphData(repositoryOwner, new Callback<GraphqlResponseObject>() {
+//        service.getGraphData(repositoryOwner, new Callback<GraphQLResponseObject>() {
 //                    @Override
-//                    public void onResponse(Call<GraphqlResponseObject> call, Response<GraphqlResponseObject> response) {
-//                        GraphqlResponseObject obj = response.body();
+//                    public void onResponse(Call<GraphQLResponseObject> call, Response<GraphQLResponseObject> response) {
+//                        GraphQLResponseObject obj = response.body();
 ////                        view.updateRepositoryOwnerView(obj.getData().getRepositoryOwner());
 ////
-////                        List<GraphqlEdgeObject> edges = obj.getData().getRepositoryOwner().repositories.edges;
+////                        List<GraphQLEdgeObject> edges = obj.getData().getRepositoryOwner().repositories.edges;
 ////                        List<GraphqlNodeObject> nodes = new ArrayList<GraphqlNodeObject>(edges.size());
 ////
 ////                        for (int i = 0; i < edges.size(); ++i) {
@@ -83,35 +83,35 @@ public class GithubListPresenter implements GithubListBasePresenter {
 //                    }
 //
 //                    @Override
-//                    public void onFailure(Call<GraphqlResponseObject> call, Throwable t) {
+//                    public void onFailure(Call<GraphQLResponseObject> call, Throwable t) {
 //                        view.showGithubFetchFailure();
 //                    }
 //                }
 //        );
 
 
-//        service.getRepositoryOwner(repositoryOwner, new Callback<GraphqlResponseObject<RepositoryOwner>>() {
+//        service.getRepositoryOwner(repositoryOwner, new Callback<GraphQLResponseObject<RepositoryOwner>>() {
 //            @Override
-//            public void onResponse(Call<GraphqlResponseObject<RepositoryOwner>> call, Response<GraphqlResponseObject<RepositoryOwner>> response) {
+//            public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
 //                view.showGithubFetchSuccess();
 //            }
 //
 //            @Override
-//            public void onFailure(Call<GraphqlResponseObject<RepositoryOwner>> call, Throwable t) {
+//            public void onFailure(Call<GraphQLResponseObject<RepositoryOwner>> call, Throwable t) {
 //                view.showGithubFetchFailure();
 //            }
 //        });
 
 
         //todo: is repositoryOwner object even needed here?
-        service.getRepositoryOwner(repositoryOwner, new Callback<GraphqlResponseObject<RepositoryOwner>>() {
+        service.getRepositoryOwner(repositoryOwner, new Callback<GraphQLResponseObject<RepositoryOwner>>() {
             @Override
-            public void onResponse(Call<GraphqlResponseObject<RepositoryOwner>> call, Response<GraphqlResponseObject<RepositoryOwner>> response) {
+            public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
                 view.showGithubFetchSuccess();
             }
 
             @Override
-            public void onFailure(Call<GraphqlResponseObject<RepositoryOwner>> call, Throwable t) {
+            public void onFailure(Call<GraphQLResponseObject<RepositoryOwner>> call, Throwable t) {
                 view.showGithubFetchFailure();
             }
         });
