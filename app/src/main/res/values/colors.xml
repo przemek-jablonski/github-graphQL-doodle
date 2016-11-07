@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/app_primary_orange</color>
+    <color name="colorPrimaryDark">#303F9f</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <!-- TRIAD COLOR SCHEME: -->
+    <!-- https://www.sessions.edu/color-calculator-results/?colors=ffccbc,dcbcff,dfffbc -->
+
+    <!-- TRIAD COLOR SCHEME (SATURATED): -->
+    <!--https://www.sessions.edu/color-calculator-results/?colors=ff5722,8d22ff,94ff22-->
+
+    <color name="backgroundPrimary">@color/materialBrown100</color>
+
+    <color name="white">#ffffff</color>
+    <color name="materialGrey50">#fafafa</color>
+    <color name="materialGrey400">#bdbdbd</color>
+    <color name="materialGrey500">#FF9E9E9E</color>
+    <color name="materialGrey700">#FF616161</color>
+    <color name="materialGrey800">#212121</color>
+    <color name="materialBrown100">#d7ccc8</color>
+
+
+
+    <color name="app_triadic_green_lighter">#dfffbc</color>
+    <color name="app_triadic_green">#94ff22</color>
+
+    <color name="app_triadic_purple_lighter">#dcbcff</color>
+    <color name="app_triadic_purple_lighter_alpha">#a4dcbcff</color>
+    <color name="app_triadic_purple">#8d22ff</color>
+
+
+    <color name="thumbnail_placeholder_white">#e8e8e8</color>
+    <color name="card_text">#4a4a4a</color>
+    <color name="recycler_view_background">#dde3e9</color>
+
+    <color name="app_primary_orange">#FF5722</color>
+    <color name="app_primary_orange_medium">#ff7043</color>
+    <color name="app_primary_orange_lighter">#ffccbc</color>
+    <color name="app_primary_orange_lighter_alpha">#6bffccbc</color>
+    <!--<color name="app_primary_orange_lighter_alpha2">#32ffccbc</color>-->
+    <color name="app_primary_orange_lighter_alpha2">#92ffd7cb</color>
+    <color name="app_primary_orange_light">#ffab91</color>
+    <color name="app_black">@color/materialGrey800</color>
+    <color name="app_white">@color/materialGrey50</color>
+
+    <color name="recycler_view_item_background">#AAAAAA</color>
+
+
+    <color name="backround_dark_gradient_start">@color/materialGrey500</color>
+    <color name="backround_dark_gradient_end">@color/materialGrey700</color>
+
+    <color name="backround_light_gradient_start">@color/materialGrey50</color>
+    <color name="backround_light_gradient_center">@color/materialBrown100</color>
+    <color name="backround_light_gradient_end">@color/materialGrey400</color>
+
+
+
+    <color name="backgroundDarkLight">#99bdbdbd</color>
+    <color name="backgroundDarkHeavy">#757575</color>
+
+
+    <color name="text_color_hardblack">#3e2723</color>
+    <color name="text_color_grey">@color/materialGrey700</color>
+    <color name="text_color_lightgrey">#d7ccc8</color>
+    <color name="text_color_orangish">#ffe5dd</color>
+    <color name="text_color_white">#ffffff</color>
 </resources>

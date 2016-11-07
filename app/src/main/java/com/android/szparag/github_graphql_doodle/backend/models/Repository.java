@@ -33,7 +33,7 @@ public class Repository extends GraphQLBaseObject {
     private String description;
     private String homepageURL;
     private String name;
-    private String url;
+    private String path;
 
 
 
@@ -59,8 +59,8 @@ public class Repository extends GraphQLBaseObject {
         return name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPath() {
+        return path;
     }
 
     public GraphQLConnectionObject<GraphQLEdgeObject<Repository>> getForks() {

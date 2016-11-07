@@ -17,4 +17,72 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <!--<style name="app_text_xxxl"><item name="android:textAppearance">@style/AppTextHugeLight</item></style>-->
+    <!--<style name="app_text_xl"><item name="android:textAppearance">@style/AppTextLargeDark</item></style>-->
+    <!--<style name="app_text_normal_light"><item name="android:textAppearance">@style/AppTextLight</item></style>-->
+    <!--<style name="app_text_normal_dark"></style>-->
+
+    <style name="AppTextTitlePrimary"><item name="android:textAppearance">@style/TextTitlePrimary</item></style>
+    <style name="TextTitlePrimary">
+        <item name="android:textColor">@color/app_triadic_purple</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/font_size_huge</item>
+    </style>
+
+    <style name="AppTextTitleNormal"><item name="android:textAppearance">@style/TextTitleNormal</item></style>
+    <style name="TextTitleNormal">
+        <item name="android:textColor">@color/app_triadic_purple</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/font_size_big</item>
+    </style>
+
+    <style name="AppTextLight"><item name="android:textAppearance">@style/TextLight</item></style>
+    <style name="TextLight">
+        <item name="android:textColor">@color/materialGrey500</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+
+    <!--<style name="AppTextHugeDark">-->
+        <!--<item name="android:textColor">@color/text_color_hardblack</item>-->
+        <!--<item name="android:textAllCaps">true</item>-->
+        <!--<item name="android:textSize">@dimen/font_size_huge_plus</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTextHugeLight">-->
+        <!--<item name="android:textColor">@color/text_color_white</item>-->
+        <!--<item name="android:textAllCaps">true</item>-->
+        <!--<item name="android:textSize">@dimen/font_size_huge_plus</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTextLargeLight">-->
+        <!--<item name="android:textColor">@color/white</item>-->
+        <!--<item name="android:textAllCaps">true</item>-->
+        <!--<item name="android:textSize">14sp</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTextLargeDark">-->
+        <!--<item name="android:textColor">@color/text_color_hardblack</item>-->
+        <!--<item name="android:textAllCaps">true</item>-->
+        <!--<item name="android:textSize">@dimen/font_size_big</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTextLight">-->
+        <!--<item name="android:textColor">@color/text_color_orangish</item>-->
+        <!--<item name="android:textSize">@dimen/font_size_normal</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTextNormalDark">-->
+        <!--<item name="android:textColor">@color/text_color_hardblack</item>-->
+        <!--<item name="android:textSize">@dimen/font_size_normal</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppTextNormalLight">-->
+        <!--<item name="android:textColor">@color/text_color_lightgrey</item>-->
+        <!--<item name="android:textSize">@dimen/font_size_normal</item>-->
+    <!--</style>-->
+
 </resources>

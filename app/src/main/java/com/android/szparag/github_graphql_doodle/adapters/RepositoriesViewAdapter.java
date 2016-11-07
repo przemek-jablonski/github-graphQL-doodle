@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.backend.models.Repository;
+import com.facebook.stetho.inspector.helper.IntegerFormatter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,8 +45,14 @@ public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<Repository>
         Repository item = items.get(position);
 
         holder.name.setText(item.getName());
-        holder.desc.setText(item.getDescription());
-        holder.path.setText(item.getUrl());
+        if (item.getDescription() == null || item.getDescription() == " ") {
+            holder.desc.setVisibility(View.GONE);
+        } else {
+            holder.desc.setText(item.getDescription());
+            holder.desc.setVisibility(View.VISIBLE);
+        }
+        holder.path.setText(item.getPath());
+        holder.stats.setText(Integer.toString(item.getStargazers().getTotalCount()));
 //        holder.stats.setText(
 //                        item.getForks().totalCount + " | " +
 //                        item.getStargazers().totalCount + " | " +

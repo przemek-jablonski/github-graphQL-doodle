@@ -2,43 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_margin="@dimen/item_separator_smaller"
+    android:layout_height="wrap_content"
+    android:background="@color/app_primary_orange_lighter_alpha2">
 
     <!--//todo: make textview style and apply here (a lot of repetitions of markers (id, lines etc) here-->
     <TextView
         android:id="@+id/item_recycler_repository_row_name"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
         android:lines="1"
         android:ellipsize="end"
-        android:text="adsasddas dasdadas dsa"/>
-
-    <TextView
-        android:id="@+id/item_recycler_repository_row_description"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:lines="1"
-        android:ellipsize="end"
-        android:text="adsasddas dasdadas dsa sadasd dasdsdsaads http://asdasdd.casd/asd ads!"/>
+        android:text="adsasddas dasdadas dsa"
+        style="@style/AppTextTitleNormal"
+        android:paddingLeft="@dimen/item_separator_normal"
+        android:paddingRight="@dimen/item_separator_normal"
+        android:background="@color/app_primary_orange_lighter_alpha2" />
 
     <TextView
         android:id="@+id/item_recycler_repository_row_path"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:lines="1"
         android:ellipsize="end"
-        android:text="http://asdasfag.asfsaf.ss/sadsddasd.das"/>
+        android:text="http://asdasfag.asfsaf.ss/sadsddasd.das"
+        android:background="@color/app_primary_orange_lighter_alpha2"
+        android:paddingBottom="@dimen/item_separator_smaller"
+        android:paddingLeft="@dimen/item_separator_normal"
+        android:paddingRight="@dimen/item_separator_normal"
+        style="@style/AppTextLight" />
+
+    <TextView
+        android:id="@+id/item_recycler_repository_row_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="adsasddas dasdadas dsa sadasd dasdsdsaads http://asdasdd.casd/asd ads!"
+        android:paddingLeft="@dimen/item_separator_normal"
+        android:paddingRight="@dimen/item_separator_normal"
+        android:padding="@dimen/item_separator_normal" />
+
+
 
     <TextView
         android:id="@+id/item_recycler_repository_row_stats"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:lines="1"
         android:ellipsize="end"
-        android:text="asdasd 123  asdadasdasd 12   asdasdaa 22222"/>
+        android:text="asdasd 123  asdadasdasd 12   asdasdaa 22222"
+        android:paddingStart="@dimen/item_separator_normal"
+        android:paddingLeft="@dimen/item_separator_normal"
+        android:paddingRight="@dimen/item_separator_normal"
+        android:paddingEnd="@dimen/item_separator_normal" />
 
 </LinearLayout>

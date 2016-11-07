@@ -7,18 +7,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_primary_orange_lighter">
 
         <TextView
-            android:id="@+id/item_repositoryowner_front_login"
+            android:id="@+id/header_repositoryowner_login"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            style="@style/AppTextTitlePrimary"
             android:gravity="center_vertical"
-            android:text="asdasdasd adas dd"/>
+            android:text="asdasdasd adas dd"
+            android:background="@color/app_triadic_purple_lighter"
+            android:paddingStart="@dimen/activity_horizontal_margin_half" />
 
         <TextView
-            android:id="@+id/item_repositoryowner_front_path"
+            android:id="@+id/header_repositoryowner_path"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -26,7 +30,7 @@
             android:text="http://api.github.clalblab/blalgasllas/ff"/>
 
         <TextView
-            android:id="@+id/item_repositoryowner_front_stats"
+            android:id="@+id/header_repositoryowner_stats"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -38,7 +42,7 @@
 
     <!-- foreground image (avatar) -->
     <ImageView
-        android:id="@+id/item_repositoryowner_front_avatar"
+        android:id="@+id/header_repositoryowner_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"

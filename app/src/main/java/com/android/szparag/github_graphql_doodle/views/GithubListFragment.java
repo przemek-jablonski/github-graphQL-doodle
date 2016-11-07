@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.view.Gravity;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.adapters.RepositoriesViewAdapter;
+import com.android.szparag.github_graphql_doodle.adapters.RepositoryOwnerAdapter;
 import com.android.szparag.github_graphql_doodle.backend.models.Repository;
 import com.android.szparag.github_graphql_doodle.backend.models.RepositoryOwner;
 import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
@@ -44,6 +44,7 @@ public class GithubListFragment extends Fragment implements GithubListView {
 
     @BindView(R.id.repositoryowner_front)
     View                    repositoryOwnerView;
+    RepositoryOwnerAdapter  repositoryOwnerAdapter;
 
     @Inject
     GithubListBasePresenter presenter;
@@ -115,7 +116,8 @@ public class GithubListFragment extends Fragment implements GithubListView {
 
     @Override
     public void buildRepositoryOwnerView() {
-
+        repositoryOwnerAdapter = new RepositoryOwnerAdapter(repositoryOwnerView);
+        hideRepositoryOwnerView();
     }
 
     @Override
@@ -131,6 +133,7 @@ public class GithubListFragment extends Fragment implements GithubListView {
     @Override
     public void updateRepositoryOwnerView(RepositoryOwner repositoryOwner) {
         showRepositoryOwnerView();
+        repositoryOwnerAdapter.updateItem(repositoryOwner);
     }
 
     @Override

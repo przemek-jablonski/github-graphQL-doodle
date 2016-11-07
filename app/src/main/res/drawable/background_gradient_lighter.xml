@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <!--http://angrytools.com/gradient/?0_9E9E9E,76_616161&0_100,90_100&l_135-->
+            <gradient
+                android:type="linear"
+                android:centerX="50%"
+                android:startColor="#ffffff"
+                android:centerColor="#7edcbcff"
+                android:endColor="#ffffff"
+                android:angle="0"/>
+        </shape>
+    </item>
+</selector>

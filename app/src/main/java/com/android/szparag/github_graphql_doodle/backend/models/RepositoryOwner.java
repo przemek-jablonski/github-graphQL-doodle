@@ -7,6 +7,7 @@ import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotati
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLConnectionObject;
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLEdgeObject;
+import com.android.szparag.github_graphql_doodle.utils.Constants;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -53,7 +54,7 @@ public class RepositoryOwner extends GraphQLBaseObject {
     }
 
     public String getPath() {
-        return path;
+        return "github.com" + path; //todo: as string constant
     }
 
     public GraphQLConnectionObject<GraphQLEdgeObject<Repository>> getRepositories() {
