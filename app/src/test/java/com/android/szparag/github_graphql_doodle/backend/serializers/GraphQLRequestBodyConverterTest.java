@@ -33,7 +33,7 @@ public class GraphQLRequestBodyConverterTest {
     @Test
     public void graphqlSerializationTesting() {
         GraphQLQueryConverter conv = new GraphQLQueryConverter();
-        RepositoryOwnerQueryFull q = new RepositoryOwnerQueryFull("login", "\"ReactiveX\"", "first", "30"); //here should be like ARGS.TYPE.FIRST
+        RepositoryOwnerQueryFull q = new RepositoryOwnerQueryFull(); //here should be like ARGS.TYPE.FIRST
 
         String querystring = conv.convertBaseObjectToquery(q.getQuery());
         System.out.println(querystring);

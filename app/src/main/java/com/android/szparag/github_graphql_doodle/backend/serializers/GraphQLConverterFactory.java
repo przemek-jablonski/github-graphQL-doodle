@@ -1,5 +1,6 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,8 +37,8 @@ public final class GraphQLConverterFactory extends Converter.Factory {
 
     public GraphQLConverterFactory() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(GraphQLObjectType.class, new GraphQLQueryConverter());
 //        gsonBuilder.registerTypeAdapter(GraphQLBaseObject.class, new GraphQLResponseBodyDeserializer<>(GraphQLBaseObject.class));
+//        gsonBuilder.registerTypeAdapter(GraphQLObjectType.class, new GraphQLQueryConverter());
 //        gsonBuilder.registerTypeAdapter(RepositoryOwner.class, new GraphQLResponseBodyDeserializer<RepositoryOwner>(RepositoryOwner.class));
 //        gsonBuilder.registerTypeAdapter(Repository.class, new GraphQLResponseBodyDeserializer<Repository>(Repository.class));
         gson = gsonBuilder.create();
@@ -76,7 +77,9 @@ public final class GraphQLConverterFactory extends Converter.Factory {
             Annotation[] methodAnnotations,
             Retrofit retrofit) {
 
-        return new GraphQLRequestBodyConverter<>();
+//        return gsonConverterFactory.requestBodyConverter(type, parameterAnnotations, methodAnnotations, retrofit);
+//        return new GraphQLRequestBodyConverter<>();
+        return new GraphQLQueryConverter<>();
     }
 
     /**

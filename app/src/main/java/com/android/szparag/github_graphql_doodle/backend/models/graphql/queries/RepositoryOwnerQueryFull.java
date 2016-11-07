@@ -20,6 +20,10 @@ public class RepositoryOwnerQueryFull extends GraphqlBaseQuery{
 
     private final String GRAPH_0BJECT_NAME = "";
 
+    public RepositoryOwnerQueryFull() {
+        this("login", "\"ReactiveX\"", "first", "30"); //make this load from some FINAL variables
+    }
+
     //todo: builder method in superclass? like (Array[](fieldName, fieldType))
     public RepositoryOwnerQueryFull(String argKey, String argValue, String repositoryArgKey, String repositoryArgVal) {
         query = newObject()

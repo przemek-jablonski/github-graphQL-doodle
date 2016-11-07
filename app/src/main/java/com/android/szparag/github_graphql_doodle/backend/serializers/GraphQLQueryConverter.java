@@ -17,7 +17,7 @@ import retrofit2.Converter;
  * Created by ciemek on 07/11/2016.
  */
 
-public class GraphQLQueryConverter implements Converter<GraphQLObjectType, RequestBody>{
+public class GraphQLQueryConverter<Q extends GraphQLObjectType> implements Converter<Q, RequestBody>{
 
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
     private static final Charset UTF_8 = Charset.forName("UTF-8");
@@ -33,12 +33,12 @@ public class GraphQLQueryConverter implements Converter<GraphQLObjectType, Reque
     private final String FIELDS_SEPARATOR = " ";
     private StringBuilder stringBuilder;
 
-    public GraphQLQueryConverter() {
-        stringBuilder = new StringBuilder(); //fixme: this should be deleted, dev/debug only
-    }
+//    public GraphQLQueryConverter() {
+//        stringBuilder = new StringBuilder(); //fixme: this should be deleted, dev/debug only
+//    }
 
     @Override
-    public RequestBody convert(GraphQLObjectType value) throws IOException {
+    public RequestBody convert(Q value) throws IOException {
         stringBuilder = new StringBuilder();
         JSONObject json = new JSONObject();
 

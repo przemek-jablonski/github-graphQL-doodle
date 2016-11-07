@@ -26,7 +26,7 @@ public class GithubListPresenter implements GithubListBasePresenter {
     private RepositoryOwner repositoryOwner;
 
     @Inject
-    GraphqlService service;
+    GraphqlService graphqlService;
 
 
     @Override
@@ -62,11 +62,9 @@ public class GithubListPresenter implements GithubListBasePresenter {
         LinkedHashMap<String, String> args = new LinkedHashMap<>();
         args.put(Constants.GraphqlConstants.ARGUMENT_LOGIN, argumentsLoginString);
 
-        //todo: this shit looks bad - instantiating before doing internet fetching?
-        repositoryOwner = new RepositoryOwner(args);
 
         //todo: maybe this 3 parameters above should go below, into .getGraphData(...)?
-//        service.getGraphData(repositoryOwner, new Callback<GraphQLResponseObject>() {
+//        graphqlService.getGraphData(repositoryOwner, new Callback<GraphQLResponseObject>() {
 //                    @Override
 //                    public void onResponse(Call<GraphQLResponseObject> call, Response<GraphQLResponseObject> response) {
 //                        GraphQLResponseObject obj = response.body();
@@ -90,7 +88,7 @@ public class GithubListPresenter implements GithubListBasePresenter {
 //        );
 
 
-//        service.getRepositoryOwner(repositoryOwner, new Callback<GraphQLResponseObject<RepositoryOwner>>() {
+//        graphqlService.getRepositoryOwner(repositoryOwner, new Callback<GraphQLResponseObject<RepositoryOwner>>() {
 //            @Override
 //            public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
 //                view.showGithubFetchSuccess();
@@ -104,7 +102,19 @@ public class GithubListPresenter implements GithubListBasePresenter {
 
 
         //todo: is repositoryOwner object even needed here?
-        service.getRepositoryOwner(repositoryOwner, new Callback<GraphQLResponseObject<RepositoryOwner>>() {
+//        graphqlService.getRepositoryOwner(repositoryOwner, new Callback<GraphQLResponseObject<RepositoryOwner>>() {
+//            @Override
+//            public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
+//                view.showGithubFetchSuccess();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GraphQLResponseObject<RepositoryOwner>> call, Throwable t) {
+//                view.showGithubFetchFailure();
+//            }
+//        });
+
+        graphqlService.getRepositoryOwner(new Callback<GraphQLResponseObject<RepositoryOwner>>() {
             @Override
             public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
                 view.showGithubFetchSuccess();
