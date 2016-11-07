@@ -19,23 +19,31 @@
             android:gravity="center_vertical"
             android:text="asdasdasd adas dd"
             android:background="@color/app_triadic_purple_lighter"
-            android:paddingStart="@dimen/activity_horizontal_margin_half" />
+            android:paddingStart="@dimen/activity_horizontal_margin_half"
+            android:paddingLeft="@dimen/activity_horizontal_margin_half" />
 
         <TextView
             android:id="@+id/header_repositoryowner_path"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="http://api.github.clalblab/blalgasllas/ff"/>
+            android:gravity="top"
+            android:text="http://api.github.clalblab/blalgasllas/ff"
+            android:paddingStart="@dimen/activity_horizontal_margin_half"
+            style="@style/AppTextLight"
+            android:paddingLeft="@dimen/activity_horizontal_margin_half" />
 
         <TextView
             android:id="@+id/header_repositoryowner_stats"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="bottom"
-            android:text="http://api.github.clalblab/blalgasllas/ff"/>
+            android:layout_height="wrap_content"
+            android:text="http://api.github.clalblab/blalgasllas/ff"
+            android:paddingStart="@dimen/activity_horizontal_margin_half"
+            style="@style/AppTextSmallHeavy"
+            android:paddingLeft="@dimen/activity_horizontal_margin_half"
+            android:background="@color/app_triadic_purple_lighter"
+            android:paddingTop="@dimen/item_separator_small"
+            android:paddingBottom="@dimen/item_separator_small" />
 
     </LinearLayout>
 
@@ -45,7 +53,7 @@
         android:id="@+id/header_repositoryowner_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="top|end" />
 
 </FrameLayout>
