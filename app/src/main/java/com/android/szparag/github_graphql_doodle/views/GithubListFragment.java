@@ -1,17 +1,18 @@
 package com.android.szparag.github_graphql_doodle.views;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.szparag.github_graphql_doodle.ConnectivityBroadcastReceiver;
+import com.android.szparag.github_graphql_doodle.ConnectivityBroadcastReceiver.ConnectivityStateListener;
 import com.android.szparag.github_graphql_doodle.R;
 import com.android.szparag.github_graphql_doodle.adapters.RepositoriesViewAdapter;
 import com.android.szparag.github_graphql_doodle.adapters.RepositoryOwnerAdapter;
@@ -22,7 +23,6 @@ import com.android.szparag.github_graphql_doodle.decorators.HorizontalSeparator;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
 import com.android.szparag.github_graphql_doodle.views.contracts.GithubListView;
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.List;
 
@@ -32,8 +32,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.net.ConnectivityManager.CONNECTIVITY_ACTION;
 
-public class GithubListFragment extends Fragment implements GithubListView {
+
+public class GithubListFragment extends Fragment implements GithubListView, ConnectivityStateListener {
 
 
     //todo: remove graphql-java library (not used)
@@ -50,7 +52,8 @@ public class GithubListFragment extends Fragment implements GithubListView {
     GithubListBasePresenter presenter;
 
     private Unbinder        unbinder;
-
+    private ConnectivityBroadcastReceiver connectivityReceiver;
+    private boolean connectivityAvailable;
 
     //todo: newInstance here!
     public GithubListFragment() {
@@ -62,6 +65,8 @@ public class GithubListFragment extends Fragment implements GithubListView {
         MainComponent dagger = Utils.getDagger2(this);
         dagger.inject(this);
         presenter.setView(this, dagger);
+        connectivityReceiver = new ConnectivityBroadcastReceiver(this);
+        getActivity().registerReceiver(connectivityReceiver, new IntentFilter(CONNECTIVITY_ACTION));
     }
 
     @Override
@@ -96,6 +101,13 @@ public class GithubListFragment extends Fragment implements GithubListView {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        connectivityReceiver.removeListener();
+        getActivity().unregisterReceiver(connectivityReceiver);
     }
 
 
@@ -138,13 +150,9 @@ public class GithubListFragment extends Fragment implements GithubListView {
 
     @Override
     public void buildRepositoriesListView() {
-        //todo: snapping!
-//        repositoriesView.setLayoutManager(
-//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        //todo: remove snapper library
         repositoriesView.setLayoutManager(new LinearLayoutManager(getContext()));
         repositoriesView.addItemDecoration(new HorizontalSeparator(getContext()));
-        SnapHelper snapHelper = new GravitySnapHelper(Gravity.TOP);
-        snapHelper.attachToRecyclerView(repositoriesView);
         repositoriesAdapter = new RepositoriesViewAdapter(null);
         repositoriesView.setAdapter(repositoriesAdapter);
         repositoriesView.setNestedScrollingEnabled(false); //todo: ...false?
@@ -165,5 +173,22 @@ public class GithubListFragment extends Fragment implements GithubListView {
         showRepositoriesListView();
         repositoriesAdapter.updateItems(repositories);
 
+    }
+
+    @Override
+    public void connectionAvailable() {
+        presenter.fetchData();
+        connectivityAvailable = true;
+    }
+
+    @Override
+    public void connectionUnvailable() {
+        connectivityAvailable = false;
+        showNetworkConnectionFailure();
+    }
+
+    @Override
+    public boolean getInternetConnectivity() {
+        return connectivityAvailable;
     }
 }

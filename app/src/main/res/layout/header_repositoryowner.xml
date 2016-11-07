@@ -8,17 +8,17 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        android:background="@color/app_primary_orange_lighter">
+        android:background="@color/app_triadic_purple_lighter">
 
         <TextView
             android:id="@+id/header_repositoryowner_login"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            style="@style/AppTextTitlePrimary"
+            style="@style/AppTextTitlePrimaryLight"
             android:gravity="center_vertical"
             android:text="asdasdasd adas dd"
-            android:background="@color/app_triadic_purple_lighter"
+            android:background="@color/app_triadic_purple"
             android:paddingStart="@dimen/activity_horizontal_margin_half"
             android:paddingLeft="@dimen/activity_horizontal_margin_half" />
 
@@ -41,7 +41,6 @@
             android:paddingStart="@dimen/activity_horizontal_margin_half"
             style="@style/AppTextSmallHeavy"
             android:paddingLeft="@dimen/activity_horizontal_margin_half"
-            android:background="@color/app_triadic_purple_lighter"
             android:paddingTop="@dimen/item_separator_small"
             android:paddingBottom="@dimen/item_separator_small" />
 

@@ -6,14 +6,10 @@ import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.Gra
 import com.android.szparag.github_graphql_doodle.backend.services.GraphqlService;
 import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
-import com.android.szparag.github_graphql_doodle.utils.Computation;
-import com.android.szparag.github_graphql_doodle.utils.Computation.RepoStatsComparator;
-import com.android.szparag.github_graphql_doodle.utils.Constants;
+import com.android.szparag.github_graphql_doodle.utils.RepoStatsComparator;
 import com.android.szparag.github_graphql_doodle.views.contracts.GithubListView;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +18,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.android.szparag.github_graphql_doodle.utils.Computation.RepoStatsComparator.SortItem.STARS;
+import static com.android.szparag.github_graphql_doodle.utils.RepoStatsComparator.SortItem.STARS;
+
 
 /**
  * Created by ciemek on 05/11/2016.
@@ -48,62 +45,62 @@ public class GithubListPresenter implements GithubListBasePresenter {
 
     @Override
     public void checkInternetConnectivity() {
-        //...
+
     }
 
     @Override
     public void checkGrantedPermissions() {
-        //...
+        //I don't check for permissions at runtime, because right now I only need
+        // .INTERNET and .ACCESS_NETWORK_STATE:
+        // http://stackoverflow.com/a/34435733/6942800
+    }
+
+    private void sortData() {
+        Collections.sort(repositores, comparator.sortBy(STARS));
     }
 
     @Override
     public void fetchData() {
-//        if (repositoryOwner.repositories.edges.size() != 0) {
-//            fetchRepositoryOwnerLocal();
-//        } else {
+        if (repositoryOwner != null) {
+            fetchRepositoryOwnerLocal();
+        } else {
             fetchRepositoryOwnerGraph();
-//            fetchRepositoryOwnerExtras();
-//        }
+            fetchRepositoryOwnerExtras();
+        }
     }
+
 
     //todo: method: sorting
 
     private void fetchRepositoryOwnerGraph() {
-
-        String argumentsLoginString = "ReactiveX";
-        LinkedHashMap<String, String> args = new LinkedHashMap<>();
-        args.put(Constants.GraphqlConstants.ARGUMENT_LOGIN, argumentsLoginString);
-
-
-
         graphqlService.getRepositoryOwner(new Callback<GraphQLResponseObject<RepositoryOwner>>() {
             @Override
             public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
-                view.showGithubFetchSuccess();
-                view.showRepositoryOwnerView();
                 repositoryOwner = response.body().getObject();
                 repositores = repositoryOwner.getRepositoriesList();
-                Collections.sort(repositores, comparator.sortBy(STARS));
-                view.updateRepositoriesListView(repositores);
-                view.updateRepositoryOwnerView(repositoryOwner);
-
+                fetchRepositoryOwnerLocal();
+                view.showGithubFetchSuccess();
             }
 
             @Override
             public void onFailure(Call<GraphQLResponseObject<RepositoryOwner>> call, Throwable t) {
-                view.showGithubFetchFailure();
+                if (view.getInternetConnectivity()) {
+                    view.showGithubFetchFailure();
+                } else {
+                    view.showNetworkConnectionFailure();
+                }
             }
         });
     }
 
-
-
     private void fetchRepositoryOwnerLocal() {
-
+        sortData();
+        view.updateRepositoriesListView(repositores);
+        view.updateRepositoryOwnerView(repositoryOwner);
     }
 
     private void fetchRepositoryOwnerExtras() {
-
+        //from REST API
     }
 
 }

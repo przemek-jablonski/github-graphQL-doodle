@@ -10,8 +10,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/app_primary_orange_light</item>
+        <item name="colorPrimaryDark">@color/app_triadic_purple</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/app_primary_orange_light</item>
+        <item name="android:navigationBarColor">@color/app_triadic_purple</item>
+        <item name="android:statusBarColor">@color/app_triadic_purple_lighter</item>
     </style>
 </resources>

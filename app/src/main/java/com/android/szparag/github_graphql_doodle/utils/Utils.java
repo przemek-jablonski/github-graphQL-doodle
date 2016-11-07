@@ -1,7 +1,11 @@
 package com.android.szparag.github_graphql_doodle.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
+import android.support.v4.net.ConnectivityManagerCompat;
 import android.util.Log;
 
 import com.android.szparag.github_graphql_doodle.GraphqlDoodleApplication;
@@ -23,13 +27,11 @@ public class Utils {
         return getDagger2(fragment.getActivity());
     }
 
-
     public static void logMisc(String... logMessages) {
         for (int i=0; i < logMessages.length; ++i) {
             logDebug(Constants.LOG_TAG_MISC, logMessages[i]);
         }
     }
-
 
     public static void logRetrofit(String... logMessages) {
         for (int i=0; i < logMessages.length; ++i) {
