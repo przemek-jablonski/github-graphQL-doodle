@@ -1,6 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.models;
 
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
+import com.android.szparag.github_graphql_doodle.utils.Constants;
 
 /**
  * Created by ciemek on 06/11/2016.
@@ -8,9 +9,7 @@ import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.Gra
 public class PullRequest extends GraphQLBaseObject {
 
     public PullRequest() {
-        super(""); //todo: Constants.graphqlcostam.NONE
+        super(Constants.GraphqlConstants.NAME_BLANK);
     }
-
-    //todo: empty?
 
 }

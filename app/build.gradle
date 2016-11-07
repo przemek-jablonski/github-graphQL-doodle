@@ -57,7 +57,5 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.4.1'
     compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
 
-    compile 'com.github.rubensousa:gravitysnaphelper:1.0'
-
 }
 

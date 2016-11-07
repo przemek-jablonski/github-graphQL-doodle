@@ -16,8 +16,9 @@ import butterknife.ButterKnife;
 
 /**
  * Created by ciemek on 06/11/2016.
+ *
+ * Implementation of BaseRecyclerViewAdapter for Github's Repository object.
  */
-
 public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<Repository> {
 
     public RepositoriesViewAdapter(@Nullable RecyclerOnPosClickListener clickListener) {

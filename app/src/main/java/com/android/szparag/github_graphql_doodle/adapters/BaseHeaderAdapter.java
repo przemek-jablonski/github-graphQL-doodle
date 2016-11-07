@@ -11,6 +11,12 @@ import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
  * Created by ciemek on 07/11/2016.
  */
 
+/**
+ * Adapter for 'header' portion of the fragment view.
+ * Maps Object <T> data to specific views inside 'header' layout.
+ *
+ * @param <T> Object with data needed for view inflation
+ */
 public abstract class BaseHeaderAdapter<T> {
 
     private T item;

@@ -27,5 +27,7 @@ public interface GithubListView {
     void updateRepositoriesListView(List<Repository> repositories);
 
 
+    void registerInternetConnectivityListener();
+    void unregisterInternetConnectivityListener();
     boolean getInternetConnectivity();
 }

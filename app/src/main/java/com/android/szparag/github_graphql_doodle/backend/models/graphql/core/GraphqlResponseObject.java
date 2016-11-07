@@ -1,6 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLType;
+import com.android.szparag.github_graphql_doodle.utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.NAME_REPOSITORIES;
@@ -17,7 +18,7 @@ public class GraphQLResponseObject<T extends GraphQLBaseObject> extends GraphQLB
     private GraphQLDataObject<T> data;
 
     public GraphQLResponseObject() {
-        super("");
+        super(Constants.GraphqlConstants.NAME_BLANK);
     }
 
     public GraphQLDataObject<T> getData() {
@@ -31,7 +32,7 @@ public class GraphQLResponseObject<T extends GraphQLBaseObject> extends GraphQLB
 
     public class GraphQLDataObject<T extends GraphQLBaseObject> extends GraphQLBaseObject {
         public GraphQLDataObject() {
-            super("");
+            super(Constants.GraphqlConstants.NAME_BLANK);
         }
         @SerializedName(
                 value = NAME_REPOSITORY_OWNER,

@@ -6,10 +6,11 @@ import java.util.Comparator;
 
 /**
  * Created by ciemek on 07/11/2016.
+ *
+ * Compares and sorts Repository object based on either STARS, FORKS or WATCHES count
  */
 
 public class RepoStatsComparator implements Comparator<Repository> {
-    //todo: inject with dagger
 
     public enum SortItem {STARS, FORKS, WATCHES};
     public SortItem sortItem = SortItem.STARS;

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.szparag.github_graphql_doodle.GraphqlDoodleApplication;
 import com.android.szparag.github_graphql_doodle.presenters.GithubListPresenter;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
+import com.android.szparag.github_graphql_doodle.utils.RepoStatsComparator;
 
 import javax.inject.Singleton;
 
@@ -34,5 +35,9 @@ public class GraphqlDoodleModule {
     GithubListBasePresenter provideGithubListBasePresenter() {
         return new GithubListPresenter();
     }
+
+    @Provides
+    @Singleton
+    RepoStatsComparator providesRepoStatsComparator() {return new RepoStatsComparator();}
 
 }

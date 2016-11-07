@@ -40,3 +40,6 @@ captures/
 # Keystore files
 *.jks
 app/src/main/res/values/apikeys.xml
+
+
+/app/src/main/java/com/android/szparag/github_graphql_doodle/backend/serializers/GraphQLRequestBodyConverter.java

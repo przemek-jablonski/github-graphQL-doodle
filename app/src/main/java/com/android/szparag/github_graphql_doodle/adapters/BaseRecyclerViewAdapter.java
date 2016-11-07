@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * Created by ciemek on 26/09/2016.
+ *
+ * Base Adapter for RecyclerViews that I tend to always paste into my projects.
+ *
+ * @param <T> Mapped objects type
  */
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

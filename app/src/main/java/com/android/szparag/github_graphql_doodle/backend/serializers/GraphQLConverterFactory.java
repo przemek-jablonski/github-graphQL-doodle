@@ -26,18 +26,31 @@ import retrofit2.http.QueryMap;
 
 /**
  * Created by ciemek on 05/11/2016.
+ *
+ * A {@linkplain Converter.Factory converter} which handles Graphql's POJOs to JSON interactions.
+ *
+ * POJOs (data types of Graphql data/queries) are serialized into JSON with custom serializer
+ * (see requestBodyConverter() method).
+ *
+ * JSON responses are deserialized with standard GSON implementation.
  */
 
 public final class GraphQLConverterFactory extends Converter.Factory {
 
-    private final Gson gson;
+    public static GraphQLConverterFactory create() {
+        return create(new Gson());
+    }
+
+    public static GraphQLConverterFactory create(Gson gson) {
+        return new GraphQLConverterFactory(gson);
+    }
+
     private final GsonConverterFactory gsonConverterFactory;
 
-//    todo: factory methods here, lol
+    private GraphQLConverterFactory(Gson gson) {
+        if (gson == null)
+            throw new NullPointerException("Gson passed to GraphQLConverterFactory is null!");
 
-    public GraphQLConverterFactory() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gson = gsonBuilder.create();
         gsonConverterFactory = GsonConverterFactory.create(gson);
     }
 
@@ -71,22 +84,6 @@ public final class GraphQLConverterFactory extends Converter.Factory {
             Retrofit retrofit) {
 
         return new GraphQLQueryConverter<>();
-    }
-
-    /**
-     * Returns a {@link Converter} for converting {@code type} to a {@link String}, or null if
-     * {@code type} cannot be handled by this factory. This is used to create converters for types
-     * specified by {@link Field @Field}, {@link FieldMap @FieldMap} values,
-     * {@link Header @Header}, {@link HeaderMap @HeaderMap}, {@link Path @Path},
-     * {@link Query @Query}, and {@link QueryMap @QueryMap} values.
-     */
-    @Override
-    public Converter<?, String> stringConverter(
-            Type type,
-            Annotation[] annotations,
-            Retrofit retrofit) {
-
-        return null;
     }
 
 }

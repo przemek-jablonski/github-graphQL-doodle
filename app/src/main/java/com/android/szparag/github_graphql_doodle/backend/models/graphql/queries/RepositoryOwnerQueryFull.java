@@ -18,8 +18,6 @@ public class RepositoryOwnerQueryFull extends GraphqlBaseQuery{
 
     private GraphQLObjectType query;
 
-    private final String GRAPH_0BJECT_NAME = "";
-
     //todo: if different name then CRASH, // FIXME: 07/11/2016
 
     public RepositoryOwnerQueryFull() {

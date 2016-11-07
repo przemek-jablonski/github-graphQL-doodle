@@ -27,58 +27,46 @@ import static com.android.szparag.github_graphql_doodle.utils.RepoStatsComparato
 
 public class GithubListPresenter implements GithubListBasePresenter {
 
-    private GithubListView view;
-    private RepositoryOwner repositoryOwner;
-    private List<Repository> repositores;
+    @Inject
+    RepoStatsComparator comparator;
 
-    private RepoStatsComparator comparator;
     @Inject
     GraphqlService graphqlService;
 
+    private GithubListView view;
+
+    private RepositoryOwner repositoryOwner;
+    private List<Repository> repositores; //temporary
 
     @Override
     public void setView(GithubListView view, MainComponent dagger) {
         this.view = view;
         dagger.inject(this);
-        comparator = new RepoStatsComparator();
     }
 
-    @Override
-    public void checkInternetConnectivity() {
-
-    }
-
-    @Override
-    public void checkGrantedPermissions() {
-        //I don't check for permissions at runtime, because right now I only need
-        // .INTERNET and .ACCESS_NETWORK_STATE:
-        // http://stackoverflow.com/a/34435733/6942800
-    }
-
-    private void sortData() {
-        Collections.sort(repositores, comparator.sortBy(STARS));
-    }
 
     @Override
     public void fetchData() {
         if (repositoryOwner != null) {
-            fetchRepositoryOwnerLocal();
+            fetchDataLocal();
         } else {
-            fetchRepositoryOwnerGraph();
-            fetchRepositoryOwnerExtras();
+            fetchDataGraphql();
+            fetchDataExtrasRest();
         }
     }
 
+    @Override
+    public void saveData(RepositoryOwner repositoryOwner) {
+        this.repositoryOwner = repositoryOwner;
+        repositores = repositoryOwner.getRepositoriesList();
+    }
 
-    //todo: method: sorting
-
-    private void fetchRepositoryOwnerGraph() {
+    private void fetchDataGraphql() {
         graphqlService.getRepositoryOwner(new Callback<GraphQLResponseObject<RepositoryOwner>>() {
             @Override
             public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
-                repositoryOwner = response.body().getObject();
-                repositores = repositoryOwner.getRepositoriesList();
-                fetchRepositoryOwnerLocal();
+                saveData(response.body().getObject());
+                fetchDataLocal();
                 view.showGithubFetchSuccess();
             }
 
@@ -93,14 +81,27 @@ public class GithubListPresenter implements GithubListBasePresenter {
         });
     }
 
-    private void fetchRepositoryOwnerLocal() {
+    private void fetchDataLocal() {
         sortData();
         view.updateRepositoriesListView(repositores);
         view.updateRepositoryOwnerView(repositoryOwner);
     }
 
-    private void fetchRepositoryOwnerExtras() {
-        //from REST API
+    private void sortData() {
+        Collections.sort(repositores, comparator.sortBy(STARS));
+    }
+
+
+    private void fetchDataExtrasRest() {
+        //extra data from REST API
+    }
+
+
+    @Override
+    public void checkGrantedPermissions() {
+        //I don't check for permissions at runtime, because right now I only need
+        // .INTERNET and .ACCESS_NETWORK_STATE:
+        // http://stackoverflow.com/a/34435733/6942800
     }
 
 }

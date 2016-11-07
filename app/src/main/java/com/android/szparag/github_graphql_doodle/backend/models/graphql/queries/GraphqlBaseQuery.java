@@ -1,5 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.queries;
 
+import com.android.szparag.github_graphql_doodle.utils.Constants;
+
 import java.util.List;
 
 import graphql.schema.GraphQLFieldDefinition;
@@ -53,6 +55,6 @@ public abstract class GraphqlBaseQuery {
                 )
                 .build();
 
-        return newFieldDefinition().name("").type(graphConnection).build();
+        return newFieldDefinition().name(Constants.GraphqlConstants.NAME_BLANK).type(graphConnection).build();
     }
 }

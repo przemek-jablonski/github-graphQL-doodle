@@ -35,12 +35,8 @@ public abstract class GraphQLBaseObject {
             }
         }
 
-        if (argumentMap.size() != arguments.size()) {
-            Utils.logMisc("Arguments for GraphQL item were not valid, deleted broken entries");
-        }
         if (argumentMap.size() == 0) {
-            Utils.logMisc("Arguments for GraphQL item were not valid or empty", "setting defaults");
-            argumentMap.put(availableArgs[0], "50");
+            argumentMap.put(availableArgs[0], "1"); //?
         }
     }
 

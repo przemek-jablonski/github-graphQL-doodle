@@ -17,8 +17,6 @@ import com.android.szparag.github_graphql_doodle.dagger.MainComponent;
 
 public class Utils {
 
-    //todo: replace 'statics' with injecting singletons with dagger
-
     public static MainComponent getDagger2(Activity activity) {
         return ((GraphqlDoodleApplication) activity.getApplication()).getDaggerComponent();
     }
@@ -26,6 +24,7 @@ public class Utils {
     public static MainComponent getDagger2(Fragment fragment) {
         return getDagger2(fragment.getActivity());
     }
+
 
     public static void logMisc(String... logMessages) {
         for (int i=0; i < logMessages.length; ++i) {
@@ -42,7 +41,6 @@ public class Utils {
     public static void logException(Throwable exception) {
         logError(Constants.LOG_TAG_EXCEPTION, exception.getMessage());
     }
-
 
     private static void logDebug(String tag, String message) {
         Log.println(Log.DEBUG, tag, message);

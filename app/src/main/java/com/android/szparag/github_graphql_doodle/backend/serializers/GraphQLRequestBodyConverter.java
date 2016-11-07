@@ -40,11 +40,6 @@ public class GraphQLRequestBodyConverter<G> implements Converter<G, RequestBody>
     private final String FIELDS_SEPARATOR = " ";
     private StringBuilder stringBuilder;
 
-    public GraphQLRequestBodyConverter() {
-        stringBuilder = new StringBuilder(); //fixme: this should be deleted, dev/debug only
-    }
-
-
     @Override
     public RequestBody convert(G value) throws IOException, ClassCastException {
 

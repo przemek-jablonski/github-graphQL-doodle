@@ -37,36 +37,31 @@ import static android.net.ConnectivityManager.CONNECTIVITY_ACTION;
 
 public class GithubListFragment extends Fragment implements GithubListView, ConnectivityStateListener {
 
-
-    //todo: remove graphql-java library (not used)
+    @BindView(R.id.repositoryowner_front)
+    View            repositoryOwnerView;
 
     @BindView(R.id.recycler_repositories)
-    RecyclerView            repositoriesView;
-    RepositoriesViewAdapter repositoriesAdapter;
-
-    @BindView(R.id.repositoryowner_front)
-    View                    repositoryOwnerView;
-    RepositoryOwnerAdapter  repositoryOwnerAdapter;
+    RecyclerView    repositoriesView;
 
     @Inject
     GithubListBasePresenter presenter;
 
-    private Unbinder        unbinder;
+    private boolean     connectivityAvailable;
+    private Unbinder    unbinder;
+
+    private RepositoryOwnerAdapter  repositoryOwnerAdapter;
+    private RepositoriesViewAdapter repositoriesAdapter;
     private ConnectivityBroadcastReceiver connectivityReceiver;
-    private boolean connectivityAvailable;
 
-    //todo: newInstance here!
-    public GithubListFragment() {
-    }
 
+    //fragment's lifecycle methods:
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainComponent dagger = Utils.getDagger2(this);
         dagger.inject(this);
         presenter.setView(this, dagger);
-        connectivityReceiver = new ConnectivityBroadcastReceiver(this);
-        getActivity().registerReceiver(connectivityReceiver, new IntentFilter(CONNECTIVITY_ACTION));
+        registerInternetConnectivityListener();
     }
 
     @Override
@@ -82,19 +77,12 @@ public class GithubListFragment extends Fragment implements GithubListView, Conn
         super.onViewCreated(view, savedInstanceState);
         buildRepositoriesListView();
         buildRepositoryOwnerView();
-        hideRepositoryOwnerView();
-        hideRepositoriesListView();
     }
 
     @Override
     public void onStart() {
         super.onStart();
         presenter.fetchData();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -106,11 +94,60 @@ public class GithubListFragment extends Fragment implements GithubListView, Conn
     @Override
     public void onDestroy() {
         super.onDestroy();
-        connectivityReceiver.removeListener();
-        getActivity().unregisterReceiver(connectivityReceiver);
+        unregisterInternetConnectivityListener();
     }
 
 
+    //handling actual UI views (build/update/show/hide):
+    //repositoryOwnerView - fragments 'Header', showing User (repositoryOwner) data
+    //repositoriesListView - RecyclerView for list of Repositories
+    @Override
+    public void buildRepositoryOwnerView() {
+        repositoryOwnerAdapter = new RepositoryOwnerAdapter(repositoryOwnerView);
+        hideRepositoryOwnerView();
+    }
+
+    @Override
+    public void buildRepositoriesListView() {
+        repositoriesView.setLayoutManager(new LinearLayoutManager(getContext()));
+        repositoriesView.addItemDecoration(new HorizontalSeparator(getContext()));
+        repositoriesAdapter = new RepositoriesViewAdapter(null);
+        repositoriesView.setAdapter(repositoriesAdapter);
+        hideRepositoriesListView();
+    }
+
+    @Override
+    public void updateRepositoryOwnerView(RepositoryOwner repositoryOwner) {
+        repositoryOwnerAdapter.updateItem(repositoryOwner);
+    }
+
+    @Override
+    public void updateRepositoriesListView(List<Repository> repositories) {
+        repositoriesAdapter.updateItems(repositories);
+    }
+
+    @Override
+    public void hideRepositoryOwnerView() {
+        repositoryOwnerView.setVisibility(View.GONE); //todo: animations on show / hide view
+    }
+
+    @Override
+    public void hideRepositoriesListView() {
+        repositoriesView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRepositoryOwnerView() {
+        repositoryOwnerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showRepositoriesListView() {
+        repositoriesView.setVisibility(View.VISIBLE);
+    }
+
+
+    //gentle messages for user on specific events (Snackbars here):
     @Override
     public void showGithubFetchSuccess() {
         Snackbar.make(getView(), getString(R.string.data_fetch_success), Snackbar.LENGTH_LONG).show();
@@ -126,59 +163,12 @@ public class GithubListFragment extends Fragment implements GithubListView, Conn
         Snackbar.make(getView(), getString(R.string.network_connection_failure), Snackbar.LENGTH_INDEFINITE).show();
     }
 
-    @Override
-    public void buildRepositoryOwnerView() {
-        repositoryOwnerAdapter = new RepositoryOwnerAdapter(repositoryOwnerView);
-        hideRepositoryOwnerView();
-    }
 
-    @Override
-    public void hideRepositoryOwnerView() {
-        repositoryOwnerView.setVisibility(View.GONE); //todo: animations on show / hide view
-    }
-
-    @Override
-    public void showRepositoryOwnerView() {
-        repositoryOwnerView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void updateRepositoryOwnerView(RepositoryOwner repositoryOwner) {
-        showRepositoryOwnerView();
-        repositoryOwnerAdapter.updateItem(repositoryOwner);
-    }
-
-    @Override
-    public void buildRepositoriesListView() {
-        //todo: remove snapper library
-        repositoriesView.setLayoutManager(new LinearLayoutManager(getContext()));
-        repositoriesView.addItemDecoration(new HorizontalSeparator(getContext()));
-        repositoriesAdapter = new RepositoriesViewAdapter(null);
-        repositoriesView.setAdapter(repositoriesAdapter);
-        repositoriesView.setNestedScrollingEnabled(false); //todo: ...false?
-    }
-
-    @Override
-    public void hideRepositoriesListView() {
-        repositoriesView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showRepositoriesListView() {
-        repositoriesView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void updateRepositoriesListView(List<Repository> repositories) {
-        showRepositoriesListView();
-        repositoriesAdapter.updateItems(repositories);
-
-    }
-
+    //Internet connection listening stuff:
     @Override
     public void connectionAvailable() {
-        presenter.fetchData();
         connectivityAvailable = true;
+        presenter.fetchData();
     }
 
     @Override
@@ -190,5 +180,18 @@ public class GithubListFragment extends Fragment implements GithubListView, Conn
     @Override
     public boolean getInternetConnectivity() {
         return connectivityAvailable;
+    }
+
+    @Override
+    public void registerInternetConnectivityListener() {
+        connectivityReceiver = new ConnectivityBroadcastReceiver(this);
+        getActivity().registerReceiver(connectivityReceiver, new IntentFilter(CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    public void unregisterInternetConnectivityListener() {
+        connectivityReceiver.removeListener();
+        getActivity().unregisterReceiver(connectivityReceiver);
+        connectivityReceiver = null;
     }
 }
