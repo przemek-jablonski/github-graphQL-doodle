@@ -15,8 +15,6 @@ import static graphql.schema.GraphQLObjectType.newObject;
 
 public abstract class GraphqlBaseQuery {
 
-    public abstract void setQuery(GraphQLObjectType query);
-
     public abstract GraphQLObjectType getQuery();
 
     protected GraphQLObjectType transformNestedObjectToNode(GraphQLObjectType nestedType) {

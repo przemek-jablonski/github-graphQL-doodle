@@ -14,10 +14,6 @@ import retrofit2.Callback;
 
 public interface GraphqlService {
 
-//    void getGraphData(GraphQLBaseObject graphQLBaseObject, Callback<GraphQLResponseObject<GraphQLBaseObject>> callback);
-//
-//    void getRepositoryOwner(RepositoryOwner repositoryOwner, Callback<GraphQLResponseObject<RepositoryOwner>> callback);
-
     void getRepositoryOwner(Callback<GraphQLResponseObject<RepositoryOwner>> callback);
     void getRepositoryOwner(GraphQLObjectType query, Callback<GraphQLResponseObject<RepositoryOwner>> callback);
 

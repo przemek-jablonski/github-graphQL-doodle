@@ -13,8 +13,10 @@ public class GraphQLEdgeObject<T extends GraphQLBaseObject> extends GraphQLBaseO
         super(Constants.GraphqlConstants.NAME_BLANK);
     }
 
-//    private String cursor;
     @GraphQLType
     private T node;
 
+    public T getNode() {
+        return node;
+    }
 }

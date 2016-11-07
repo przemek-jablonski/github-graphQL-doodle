@@ -16,15 +16,6 @@ import retrofit2.http.POST;
 
 public interface GraphqlApi {
 
-//    @POST("graphql")
-//    Call<GraphQLResponseObject> getGraphData(@Body GraphQLBaseObject graphqlObject);
-
-//    @POST("graphql")
-//    Call<GraphQLResponseObject<GraphQLBaseObject>> getGraphData(@Body GraphQLBaseObject baseObject);
-//
-//    @POST("graphql")
-//    Call<GraphQLResponseObject<RepositoryOwner>> getGraphData(@Body RepositoryOwner repositoryOwner);
-
     @POST("graphql")
     Call<GraphQLResponseObject<GraphQLBaseObject>> getGraphData(@Body GraphQLObjectType query);
 

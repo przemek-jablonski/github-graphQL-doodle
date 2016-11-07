@@ -24,9 +24,14 @@ public class GraphQLConnectionObject<E extends GraphQLEdgeObject> extends GraphQ
     }
 
     private int totalCount;
-    //    private PageInfo pageInfo;
 
     private List<E> edges;
 
+    public int getTotalCount() {
+        return totalCount;
+    }
 
+    public List<E> getEdges() {
+        return edges;
+    }
 }

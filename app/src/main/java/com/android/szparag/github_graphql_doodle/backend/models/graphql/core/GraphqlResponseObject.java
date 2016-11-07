@@ -29,7 +29,6 @@ public class GraphQLResponseObject<T extends GraphQLBaseObject> extends GraphQLB
     }
 
 
-
     public class GraphQLDataObject<T extends GraphQLBaseObject> extends GraphQLBaseObject {
         public GraphQLDataObject() {
             super("");

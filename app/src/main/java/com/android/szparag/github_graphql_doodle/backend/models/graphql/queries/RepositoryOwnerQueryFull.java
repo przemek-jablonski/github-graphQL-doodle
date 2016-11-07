@@ -47,8 +47,4 @@ public class RepositoryOwnerQueryFull extends GraphqlBaseQuery{
         return query;
     }
 
-    @Override
-    public void setQuery(GraphQLObjectType query) {
-        this.query = query;
-    }
 }

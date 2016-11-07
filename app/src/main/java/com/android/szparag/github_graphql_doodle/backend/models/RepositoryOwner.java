@@ -9,6 +9,8 @@ import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.Gra
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLEdgeObject;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.ARGUMENT_LOGIN;
 import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.NAME_REPOSITORY_OWNER;
@@ -46,4 +48,27 @@ public class RepositoryOwner extends GraphQLBaseObject {
         return avatarURL;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public GraphQLConnectionObject<GraphQLEdgeObject<Repository>> getRepositories() {
+        return repositories;
+    }
+
+    public List<Repository> getRepositoriesList() {
+        List<Repository> repositoriesList = new LinkedList<>();
+        for (int i = 0; i < repositories.getEdges().size(); ++i) {
+            repositoriesList.add(repositories.getEdges().get(i).getNode());
+        }
+        return repositoriesList;
+    }
+
+    public Repository getRepository() {
+        return repository;
+    }
 }

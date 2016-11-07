@@ -44,11 +44,6 @@ public class RepositoryQueryShallow extends GraphqlBaseQuery {
 
 
     @Override
-    public void setQuery(GraphQLObjectType query) {
-        this.query = query;
-    }
-
-    @Override
     public GraphQLObjectType getQuery() {
         return query;
     }

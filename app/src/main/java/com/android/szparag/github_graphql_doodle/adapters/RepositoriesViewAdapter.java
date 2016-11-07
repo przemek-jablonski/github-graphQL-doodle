@@ -70,7 +70,6 @@ public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<Repository>
         @BindView(R.id.item_recycler_repository_row_stats)
         TextView stats;
 
-
         public RepositoriesViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

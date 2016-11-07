@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.android.szparag.github_graphql_doodle.decorators.HorizontalSeparator;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
 import com.android.szparag.github_graphql_doodle.views.contracts.GithubListView;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.List;
 
@@ -97,17 +100,17 @@ public class GithubListFragment extends Fragment implements GithubListView {
 
     @Override
     public void showGithubFetchSuccess() {
-        Snackbar.make(getView(), getString(R.string.data_fetch_success), Snackbar.LENGTH_LONG);
+        Snackbar.make(getView(), getString(R.string.data_fetch_success), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showGithubFetchFailure() {
-        Snackbar.make(getView(), getString(R.string.data_fetch_failure), Snackbar.LENGTH_LONG);
+        Snackbar.make(getView(), getString(R.string.data_fetch_failure), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showNetworkConnectionFailure() {
-        Snackbar.make(getView(), getString(R.string.network_connection_failure), Snackbar.LENGTH_INDEFINITE);
+        Snackbar.make(getView(), getString(R.string.network_connection_failure), Snackbar.LENGTH_INDEFINITE).show();
     }
 
     @Override
@@ -133,10 +136,12 @@ public class GithubListFragment extends Fragment implements GithubListView {
     @Override
     public void buildRepositoriesListView() {
         //todo: snapping!
-        repositoriesView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        repositoriesView.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        repositoriesView.setLayoutManager(new LinearLayoutManager(getContext()));
         repositoriesView.addItemDecoration(new HorizontalSeparator(getContext()));
-        new LinearSnapHelper().attachToRecyclerView(repositoriesView);
+        SnapHelper snapHelper = new GravitySnapHelper(Gravity.TOP);
+        snapHelper.attachToRecyclerView(repositoriesView);
         repositoriesAdapter = new RepositoriesViewAdapter(null);
         repositoriesView.setAdapter(repositoriesAdapter);
         repositoriesView.setNestedScrollingEnabled(false); //todo: ...false?

@@ -37,10 +37,6 @@ public final class GraphQLConverterFactory extends Converter.Factory {
 
     public GraphQLConverterFactory() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.registerTypeAdapter(GraphQLBaseObject.class, new GraphQLResponseBodyDeserializer<>(GraphQLBaseObject.class));
-//        gsonBuilder.registerTypeAdapter(GraphQLObjectType.class, new GraphQLQueryConverter());
-//        gsonBuilder.registerTypeAdapter(RepositoryOwner.class, new GraphQLResponseBodyDeserializer<RepositoryOwner>(RepositoryOwner.class));
-//        gsonBuilder.registerTypeAdapter(Repository.class, new GraphQLResponseBodyDeserializer<Repository>(Repository.class));
         gson = gsonBuilder.create();
         gsonConverterFactory = GsonConverterFactory.create(gson);
     }
@@ -58,10 +54,7 @@ public final class GraphQLConverterFactory extends Converter.Factory {
             Annotation[] annotations,
             Retrofit retrofit) {
 
-        //todo: maybe get rid of GSON?
         return gsonConverterFactory.responseBodyConverter(type, annotations, retrofit);
-//        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-//        return new GsonResponseBodyConverter<>(gson, adapter);
     }
 
     /**
@@ -77,8 +70,6 @@ public final class GraphQLConverterFactory extends Converter.Factory {
             Annotation[] methodAnnotations,
             Retrofit retrofit) {
 
-//        return gsonConverterFactory.requestBodyConverter(type, parameterAnnotations, methodAnnotations, retrofit);
-//        return new GraphQLRequestBodyConverter<>();
         return new GraphQLQueryConverter<>();
     }
 

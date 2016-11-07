@@ -3,6 +3,8 @@ package com.android.szparag.github_graphql_doodle.backend.models;
 import android.support.annotation.Nullable;
 
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLConnectionObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLEdgeObject;
 
 import java.util.LinkedHashMap;
 
@@ -35,10 +37,10 @@ public class Repository extends GraphQLBaseObject {
 
 
 
-//    private GraphQLConnectionObject<GraphQLEdgeObject<Repository>>  forks;
-//    private GraphQLConnectionObject<GraphQLEdgeObject<PullRequest>> pullRequests;
-//    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        stargazers;
-//    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        watchers;
+    private GraphQLConnectionObject<GraphQLEdgeObject<Repository>>  forks;
+    private GraphQLConnectionObject<GraphQLEdgeObject<PullRequest>> pullRequests;
+    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        stargazers;
+    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        watchers;
 
 
     public String[] getAvailableArgs() {
@@ -61,4 +63,19 @@ public class Repository extends GraphQLBaseObject {
         return url;
     }
 
+    public GraphQLConnectionObject<GraphQLEdgeObject<Repository>> getForks() {
+        return forks;
+    }
+
+    public GraphQLConnectionObject<GraphQLEdgeObject<PullRequest>> getPullRequests() {
+        return pullRequests;
+    }
+
+    public GraphQLConnectionObject<GraphQLEdgeObject<User>> getStargazers() {
+        return stargazers;
+    }
+
+    public GraphQLConnectionObject<GraphQLEdgeObject<User>> getWatchers() {
+        return watchers;
+    }
 }
