@@ -16,6 +16,8 @@ public interface GithubListView {
     void showGithubFetchSuccess();
     void showGithubFetchFailure();
 
+    void showGithubApiKeyFailure();
+
     void buildRepositoryOwnerView();
     void hideRepositoryOwnerView();
     void showRepositoryOwnerView();

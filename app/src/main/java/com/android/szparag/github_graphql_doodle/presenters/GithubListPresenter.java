@@ -13,6 +13,7 @@ import com.android.szparag.github_graphql_doodle.repositories.RepositoryOwnerRep
 import com.android.szparag.github_graphql_doodle.utils.RepoStatsComparator;
 import com.android.szparag.github_graphql_doodle.views.contracts.GithubListView;
 
+import java.security.InvalidKeyException;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,6 +81,10 @@ public class GithubListPresenter implements GithubListBasePresenter {
         graphqlService.getRepositoryOwner(new Callback<GraphQLResponseObject<RepositoryOwner>>() {
             @Override
             public void onResponse(Call<GraphQLResponseObject<RepositoryOwner>> call, Response<GraphQLResponseObject<RepositoryOwner>> response) {
+                if (response.body() == null || response.body().getObject() == null) {
+                    onFailure(call, new InvalidKeyException());
+                    return;
+                }
                 saveData(response.body().getObject());
                 fetchDataLocal();
                 view.showGithubFetchSuccess();
@@ -87,6 +92,9 @@ public class GithubListPresenter implements GithubListBasePresenter {
 
             @Override
             public void onFailure(Call<GraphQLResponseObject<RepositoryOwner>> call, Throwable t) {
+                if(t instanceof InvalidKeyException) {
+                    view.showGithubApiKeyFailure();
+                }
                 if (view.getInternetConnectivity()) {
                     view.showGithubFetchFailure();
                 } else {

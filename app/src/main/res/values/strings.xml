@@ -8,6 +8,7 @@
 
     <string name="data_fetch_success">Fetched data successfully</string>
     <string name="data_fetch_failure">Fetching data failed</string>
+    <string name="api_key_failure">Fetching failed (invalid or no apikey?)</string>
 
     <string name="network_connection_failure">No internet connection!</string>
 

@@ -159,6 +159,11 @@ public class GithubListFragment extends Fragment implements GithubListView, Conn
     }
 
     @Override
+    public void showGithubApiKeyFailure() {
+        Snackbar.make(getView(), getString(R.string.api_key_failure), Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showNetworkConnectionFailure() {
         Snackbar.make(getView(), getString(R.string.network_connection_failure), Snackbar.LENGTH_INDEFINITE).show();
     }
