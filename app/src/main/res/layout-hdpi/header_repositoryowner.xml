@@ -52,7 +52,7 @@
         android:id="@+id/header_repositoryowner_avatar"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/icon"
         android:layout_gravity="top|end" />
 
 </FrameLayout>
