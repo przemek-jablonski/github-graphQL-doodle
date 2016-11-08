@@ -15,7 +15,15 @@ Other than that, it's very simple and standard modern MVP Android app.
 >//todo: Right now Graphql query and response objects are decoupled from one another. I will be finishing reflective query creation, based on response object in near future.
 
 #
-Not thoroughly commented, but code is really nice and clean, so I'm sure following along will be a breeze.
+```
+BRO TIP: github's api key is stored in apikeys.xml file in res/values folder, which is not in this repo! Create it, like below
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="github_graphql_app_personal_token">YOUR_API_KEY_HERE</string>
+</resources>
+```
+
 
 Used Dagger2, Retrofit, GraphQL-Java, Gson, MVP, ButterKnife, Picasso.
 
