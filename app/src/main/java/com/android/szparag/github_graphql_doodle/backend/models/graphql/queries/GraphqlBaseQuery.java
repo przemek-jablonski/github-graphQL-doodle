@@ -34,11 +34,11 @@ public abstract class GraphqlBaseQuery {
     }
 
     //todo: graphql interface instead of ArgKey + ":" + ArgVal
-    protected GraphQLFieldDefinition createEdgedObject(GraphQLObjectType nestedType, String queryName, String argumentKey, String argumentValue) {
+    protected GraphQLFieldDefinition createEdgedObject(GraphQLObjectType nestedType, String queryName, String outerArgumentKey, String outerArgumentValue) {
 
         GraphQLObjectType graphConnection = newObject()
                 .name(queryName)
-                .description(argumentKey + ":" + argumentValue) //// TODO// : 07/11/2016
+                .description(outerArgumentKey + ":" + outerArgumentValue)
                 .field(newFieldDefinition()
                         .name("totalCount")
                         .type(GraphQLInt)

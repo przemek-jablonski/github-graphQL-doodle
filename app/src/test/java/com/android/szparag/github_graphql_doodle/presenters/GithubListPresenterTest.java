@@ -55,8 +55,6 @@ public class GithubListPresenterTest {
         presenter.setView(mockView, mock(GraphqlService.class), mockDataRepository);
     }
 
-//
-
 
     @Test
     public void fetchData_updateViewIfDataExists() {

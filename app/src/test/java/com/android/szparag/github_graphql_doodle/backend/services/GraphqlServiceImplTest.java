@@ -50,7 +50,7 @@ public class GraphqlServiceImplTest {
     ArgumentCaptor<Callback<GraphQLResponseObject<RepositoryOwner>>> mockArgumentCaptor;
 
 
-    //todo: mockito testing
+    //todo: retrofit testing
 
     @Before
     public void setup() {

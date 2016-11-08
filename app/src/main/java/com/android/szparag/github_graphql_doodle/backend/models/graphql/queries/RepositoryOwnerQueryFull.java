@@ -1,7 +1,13 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.queries;
 
+import com.android.szparag.github_graphql_doodle.utils.Constants;
+
 import graphql.schema.GraphQLObjectType;
 
+import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.DEFAULT_INNER_ARGUMENT_KEY;
+import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.DEFAULT_INNER_ARGUMENT_VAL;
+import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.DEFAULT_OUTER_ARGUMENT_KEY;
+import static com.android.szparag.github_graphql_doodle.utils.Constants.GraphqlConstants.DEFAULT_OUTER_ARGUMENT_VAL;
 import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 import static graphql.schema.GraphQLObjectType.newObject;
@@ -12,20 +18,19 @@ import static graphql.schema.GraphQLObjectType.newObject;
 
 public class RepositoryOwnerQueryFull extends GraphqlBaseQuery{
 
+    public static String FIELD_NAME = "repositoryOwner";
     private GraphQLObjectType query;
 
-    //todo: if different name then CRASH, // FIXME: 07/11/2016
-
     public RepositoryOwnerQueryFull() {
-        this("login", "\"ReactiveX\"", "first", "30"); //todo: make this load from some FINAL variables
+        this(DEFAULT_OUTER_ARGUMENT_KEY, DEFAULT_OUTER_ARGUMENT_VAL,
+                DEFAULT_INNER_ARGUMENT_KEY, DEFAULT_INNER_ARGUMENT_VAL);
     }
 
-    //todo: builder method in superclass? like (Array[](fieldName, fieldType))
     public RepositoryOwnerQueryFull(String argKey, String argValue, String repositoryArgKey, String repositoryArgVal) {
         query = newObject()
-                .name("repositoryOwner")
-                .description(argKey + ":" + argValue) //todo: FUCK THIS SHIT
-                .field(newFieldDefinition()
+                .name(FIELD_NAME)
+                .description(argKey + ":" + argValue)
+                .field(newFieldDefinition()     //todo: fill this fields by reflection from fields of RepositoryOwner.class
                         .name("avatarURL")
                         .type(GraphQLString))
                 .field(newFieldDefinition()
@@ -34,8 +39,12 @@ public class RepositoryOwnerQueryFull extends GraphqlBaseQuery{
                 .field(newFieldDefinition()
                         .name("path")
                         .type(GraphQLString))
-                .field(createEdgedObject(new RepositoryQueryShallow().getQuery(), "repositories", repositoryArgKey, repositoryArgVal)) //todo: argument validation
-                .build();
+                .field(createEdgedObject(
+                        new RepositoryQueryShallow().getQuery(),
+                        RepositoryQueryShallow.FIELD_NAME,
+                        repositoryArgKey,
+                        repositoryArgVal)
+                ).build();
     }
 
     @Override

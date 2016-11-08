@@ -54,6 +54,13 @@
         <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
 
+    <style name="AppTextSmallerHeavy"><item name="android:textAppearance">@style/TextSmallerHeavy</item></style>
+    <style name="TextSmallerHeavy">
+        <item name="android:textColor">@color/materialGrey500</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
 
     <!--<style name="AppTextHugeDark">-->
         <!--<item name="android:textColor">@color/text_color_hardblack</item>-->

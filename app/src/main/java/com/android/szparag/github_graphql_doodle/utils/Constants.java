@@ -33,6 +33,11 @@ public class Constants {
         public static final String NAME_REPOSITORY = "repository";
         public static final String NAME_VIEWER = "viewer";
         public static final String NAME_BLANK = "";
+
+        public static final String DEFAULT_OUTER_ARGUMENT_KEY = "login";
+        public static final String DEFAULT_OUTER_ARGUMENT_VAL  = "\"ReactiveX\"";
+        public static final String DEFAULT_INNER_ARGUMENT_KEY= "first";
+        public static final String DEFAULT_INNER_ARGUMENT_VAL = "30";
     }
 
 }

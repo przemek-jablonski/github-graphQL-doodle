@@ -31,12 +31,18 @@ public class RepositoryOwnerAdapter extends BaseHeaderAdapter<RepositoryOwner> {
 
     @Override
     public void bindView() {
+        Picasso.with(holder.avatar.getContext()).load(getItem().getAvatarURL()).into(holder.avatar);
         holder.login.setText(getItem().getLogin());
         holder.path.setText(getItem().getPath());
-        holder.stats.setText("reps: " +getItem().getRepositories().getTotalCount());
-        Picasso.with(holder.avatar.getContext())
-                .load(getItem().getAvatarURL())
-                .into(holder.avatar);
+        holder.stats.setText(
+                holder.stats.getContext()
+                        .getString(
+                                R.string.repositories_count,
+                                getItem().getRepositories().getTotalCount(),
+                                getItem().getRepositories().getEdges().size()
+                        )
+        );
+
     }
 
     public class RepositoryOwnerViewHolder {

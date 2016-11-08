@@ -17,7 +17,7 @@
         style="@style/AppTextTitleNormal"
         android:paddingLeft="@dimen/item_separator_normal"
         android:paddingRight="@dimen/item_separator_normal"
-        android:background="@color/app_primary_orange_lighter_alpha2" />
+        android:background="@color/app_primary_orange_lighter" />
 
     <TextView
         android:id="@+id/item_recycler_repository_row_path"
@@ -55,6 +55,8 @@
         android:paddingStart="@dimen/item_separator_normal"
         android:paddingLeft="@dimen/item_separator_normal"
         android:paddingRight="@dimen/item_separator_normal"
-        android:paddingEnd="@dimen/item_separator_normal" />
+        android:paddingEnd="@dimen/item_separator_normal"
+        style="@style/AppTextSmallerHeavy"
+        android:paddingTop="@dimen/activity_horizontal_margin_half" />
 
 </LinearLayout>

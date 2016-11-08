@@ -12,12 +12,13 @@ import static graphql.schema.GraphQLObjectType.newObject;
 
 public class RepositoryQueryShallow extends GraphqlBaseQuery {
 
+    public static String FIELD_NAME = "repositories";
     private GraphQLObjectType query;
 
     public RepositoryQueryShallow() {
         super();
         query = newObject()
-                .name("repository")
+                .name(FIELD_NAME)
                 .field(newFieldDefinition()
                         .name("name")
                         .type(GraphQLString))

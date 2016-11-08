@@ -12,6 +12,5 @@ public class GithubListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //todo: make fab again (in fragment)
     }
 }

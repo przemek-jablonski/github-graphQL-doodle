@@ -34,7 +34,6 @@ public class PrintResponseInterceptor implements Interceptor {
 
         String bodyString = response.body().string();
         if (response.body() == null) {
-            //TODO: throw exception here
             logMessage = RESPONSE +
                     "TIME: " + ((t2 - t1) / 1e6d) + "ms" + "\n" +
                     "URL: " + request.url() + "\n" +

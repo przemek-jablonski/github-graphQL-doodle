@@ -53,12 +53,15 @@ public class RepositoriesViewAdapter extends BaseRecyclerViewAdapter<Repository>
             holder.desc.setVisibility(View.VISIBLE);
         }
         holder.path.setText(item.getPath());
-        holder.stats.setText(Integer.toString(item.getStargazers().getTotalCount()));
-//        holder.stats.setText(
-//                        item.getForks().totalCount + " | " +
-//                        item.getStargazers().totalCount + " | " +
-//                        item.getWatchers().totalCount
-//        );
+        holder.stats.setText(
+                holder.stats.getContext()
+                        .getString(
+                                R.string.repository_stats,
+                                item.getStargazers().getTotalCount(),
+                                item.getForks().getTotalCount(),
+                                item.getWatchers().getTotalCount()
+                                )
+        );
 
     }
 

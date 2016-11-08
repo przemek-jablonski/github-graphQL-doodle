@@ -128,7 +128,7 @@ public class GithubListFragment extends Fragment implements GithubListView, Conn
 
     @Override
     public void hideRepositoryOwnerView() {
-        repositoryOwnerView.setVisibility(View.GONE); //todo: animations on show / hide view
+        repositoryOwnerView.setVisibility(View.GONE);
     }
 
     @Override
