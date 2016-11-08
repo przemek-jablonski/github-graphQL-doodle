@@ -16,7 +16,9 @@ public class RepoStatsComparator implements Comparator<Repository> {
     public SortItem sortItem = SortItem.STARS;
 
     public RepoStatsComparator sortBy(SortItem sortItem) {
-        this.sortItem = sortItem;
+        if(sortItem != null) {
+            this.sortItem = sortItem;
+        }
         return this;
     }
 

@@ -1,6 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.core;
 
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.annotations.GraphQLType;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.queries.GraphqlBaseQuery;
 import com.android.szparag.github_graphql_doodle.utils.Utils;
 
 import java.util.Map;
@@ -16,6 +17,8 @@ public abstract class GraphQLBaseObject {
     protected String serializableName;
     protected TreeMap<String, String> argumentMap;
     protected String[] availableArgs;
+    protected GraphqlBaseQuery query;
+
 
 
     public GraphQLBaseObject(String serializableName) {

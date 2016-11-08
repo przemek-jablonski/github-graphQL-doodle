@@ -1,5 +1,7 @@
 package com.android.szparag.github_graphql_doodle.backend.serializers;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,16 +33,15 @@ public class GraphQLQueryConverter<Q extends GraphQLObjectType> implements Conve
     private final String ARGUMENT_APPEND_NEXT = ",";
     private final String QUERY = "query";
     private final String FIELDS_SEPARATOR = " ";
-    private StringBuilder stringBuilder;
 
-//    public GraphQLQueryConverter() {
-//        stringBuilder = new StringBuilder(); //fixme: this should be deleted, dev/debug only
-//    }
+    private StringBuilder stringBuilder;
+    private JSONObject json;
+
 
     @Override
     public RequestBody convert(Q value) throws IOException {
         stringBuilder = new StringBuilder();
-        JSONObject json = new JSONObject();
+        json = new JSONObject();
 
         try {
             json.put(QUERY, convertBaseObjectToquery(value));
@@ -52,7 +53,7 @@ public class GraphQLQueryConverter<Q extends GraphQLObjectType> implements Conve
         return RequestBody.create(MEDIA_TYPE, json.toString());
     }
 
-    public String convertBaseObjectToquery(GraphQLObjectType graphqlType, boolean isRecursivelyCalled) {
+    private String convertBaseObjectToquery(GraphQLObjectType graphqlType, boolean isRecursivelyCalled) {
         if(!isRecursivelyCalled) stringBuilder.append(EXPRESSION_START);
 
         makeQuery(graphqlType);
@@ -73,11 +74,9 @@ public class GraphQLQueryConverter<Q extends GraphQLObjectType> implements Conve
         return stringBuilder.toString();
     }
 
-    public String convertBaseObjectToquery(GraphQLObjectType graphqlType) {
+    private String convertBaseObjectToquery(GraphQLObjectType graphqlType) {
         return convertBaseObjectToquery(graphqlType, false);
     }
-
-    //todo: arguments stuff!
 
     private void makeQuery(GraphQLObjectType graphQLObjectType) {
         stringBuilder

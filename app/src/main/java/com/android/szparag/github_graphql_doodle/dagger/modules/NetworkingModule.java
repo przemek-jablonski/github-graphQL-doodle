@@ -49,7 +49,7 @@ public class NetworkingModule {
             @Named(Constants.GITHUB_GRAPHQL_APIKEY) String graphqlApiKey) {
         return new Retrofit.Builder()
                 .baseUrl(graphqlEndpoint)
-                .addConverterFactory(new GraphQLConverterFactory())
+                .addConverterFactory(GraphQLConverterFactory.create())
                 .client(
                         new OkHttpClient.Builder()
                                 .addInterceptor(new OAuthTokenInterceptor(graphqlApiKey))

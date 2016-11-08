@@ -30,40 +30,13 @@ public class GraphQLRequestBodyConverterTest {
         owner = new RepositoryOwner(map);
     }
 
-    @Test
-    public void graphqlSerializationTesting() {
-        GraphQLQueryConverter conv = new GraphQLQueryConverter();
-        RepositoryOwnerQueryFull q = new RepositoryOwnerQueryFull(); //here should be like ARGS.TYPE.FIRST
-
-        String querystring = conv.convertBaseObjectToquery(q.getQuery());
-        System.out.println(querystring);
-    }
-
-//    GraphQLRequestBodyConverter conv;
-//    RepositoryOwner own;
-//
-//    @Before
-//    public void setup() {
-//        conv = new GraphQLRequestBodyConverter<>();
-//        own = new RepositoryOwner("repositoryOwner", true, "ReactiveX");
-//    }
-//
 //    @Test
-//    public void convertedStringProgressTest() {
-//        String str = conv.convertGraphqlObjectToString(own);
-//        System.out.println(str);
-//    }
+//    public void graphqlSerializationTesting() {
+//        GraphQLQueryConverter conv = new GraphQLQueryConverter();
+//        RepositoryOwnerQueryFull q = new RepositoryOwnerQueryFull(); //here should be like ARGS.TYPE.FIRST
 //
-//    @Test
-//    public void convertedJsonProgressTest(){
-//        RequestBody body = null;
-//        try {
-//            body=conv.convert(own);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println(body.toString());
+//        String querystring = conv.convertBaseObjectToquery(q.getQuery());
+//        System.out.println(querystring);
 //    }
 
 }

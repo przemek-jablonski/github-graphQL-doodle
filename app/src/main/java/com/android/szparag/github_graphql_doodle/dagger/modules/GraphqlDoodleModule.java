@@ -5,6 +5,8 @@ import android.content.Context;
 import com.android.szparag.github_graphql_doodle.GraphqlDoodleApplication;
 import com.android.szparag.github_graphql_doodle.presenters.GithubListPresenter;
 import com.android.szparag.github_graphql_doodle.presenters.contracts.GithubListBasePresenter;
+import com.android.szparag.github_graphql_doodle.repositories.InMemoryRepositoryOwnerRepository;
+import com.android.szparag.github_graphql_doodle.repositories.RepositoryOwnerRepository;
 import com.android.szparag.github_graphql_doodle.utils.RepoStatsComparator;
 
 import javax.inject.Singleton;
@@ -38,6 +40,14 @@ public class GraphqlDoodleModule {
 
     @Provides
     @Singleton
-    RepoStatsComparator providesRepoStatsComparator() {return new RepoStatsComparator();}
+    RepoStatsComparator provideRepoStatsComparator() {
+        return new RepoStatsComparator();
+    }
+
+    @Provides
+    @Singleton
+    RepositoryOwnerRepository provideRepositoryOwnerRepository(RepoStatsComparator comparator) {
+        return new InMemoryRepositoryOwnerRepository(comparator);
+    }
 
 }

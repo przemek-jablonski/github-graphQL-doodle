@@ -1,9 +1,5 @@
 package com.android.szparag.github_graphql_doodle.backend.models.graphql.queries;
 
-import com.android.szparag.github_graphql_doodle.backend.models.Repository;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLConnectionObject;
-import com.android.szparag.github_graphql_doodle.utils.Constants;
-
 import graphql.schema.GraphQLObjectType;
 
 import static graphql.Scalars.GraphQLString;
@@ -21,7 +17,7 @@ public class RepositoryOwnerQueryFull extends GraphqlBaseQuery{
     //todo: if different name then CRASH, // FIXME: 07/11/2016
 
     public RepositoryOwnerQueryFull() {
-        this("login", "\"ReactiveX\"", "first", "30"); //make this load from some FINAL variables
+        this("login", "\"ReactiveX\"", "first", "30"); //todo: make this load from some FINAL variables
     }
 
     //todo: builder method in superclass? like (Array[](fieldName, fieldType))

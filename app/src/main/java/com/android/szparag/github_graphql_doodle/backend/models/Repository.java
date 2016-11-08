@@ -3,8 +3,7 @@ package com.android.szparag.github_graphql_doodle.backend.models;
 import android.support.annotation.Nullable;
 
 import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLBaseObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLConnectionObject;
-import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLEdgeObject;
+import com.android.szparag.github_graphql_doodle.backend.models.graphql.core.GraphQLGraphObject;
 
 import java.util.LinkedHashMap;
 
@@ -29,6 +28,10 @@ public class Repository extends GraphQLBaseObject {
         checkArguments(args);
     }
 
+    public Repository() {
+        this(null);
+    }
+
 
     private String description;
     private String homepageURL;
@@ -36,11 +39,10 @@ public class Repository extends GraphQLBaseObject {
     private String path;
 
 
-
-    private GraphQLConnectionObject<GraphQLEdgeObject<Repository>>  forks;
-    private GraphQLConnectionObject<GraphQLEdgeObject<PullRequest>> pullRequests;
-    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        stargazers;
-    private GraphQLConnectionObject<GraphQLEdgeObject<User>>        watchers;
+    private GraphQLGraphObject<Repository>  forks;
+    private GraphQLGraphObject<PullRequest> pullRequests;
+    private GraphQLGraphObject<User>        stargazers;
+    private GraphQLGraphObject<User>        watchers;
 
 
     public String[] getAvailableArgs() {
@@ -63,19 +65,19 @@ public class Repository extends GraphQLBaseObject {
         return path;
     }
 
-    public GraphQLConnectionObject<GraphQLEdgeObject<Repository>> getForks() {
+    public GraphQLGraphObject<Repository> getForks() {
         return forks;
     }
 
-    public GraphQLConnectionObject<GraphQLEdgeObject<PullRequest>> getPullRequests() {
+    public GraphQLGraphObject<PullRequest> getPullRequests() {
         return pullRequests;
     }
 
-    public GraphQLConnectionObject<GraphQLEdgeObject<User>> getStargazers() {
+    public GraphQLGraphObject<User> getStargazers() {
         return stargazers;
     }
 
-    public GraphQLConnectionObject<GraphQLEdgeObject<User>> getWatchers() {
+    public GraphQLGraphObject<User> getWatchers() {
         return watchers;
     }
 }
