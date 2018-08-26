@@ -1,4 +1,5 @@
 # github-graphQL-doodle
+<sup>last commit on Nov 8, 2016</sup>
 
 Doodling with new GitHub's GraphQL API for querying and retrieving data.
 #
